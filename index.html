@@ -1,1417 +1,747 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>신입사원(OJT)·수습평가 관리 매뉴얼</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #f7f7fb;
-      --bg-card: #ffffff;
-      --border: #e0e0ea;
-      --accent: #2d6cdf;
-      --accent-soft: #e3edff;
-      --text: #1f2430;
-      --muted: #6c7480;
-      --code: #27293a;
-      --danger: #d64545;
-      --shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.08);
-      --radius-lg: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    header {
-      background: linear-gradient(135deg, #2447a3, #2f7bda);
-      color: #fff;
-      padding: 28px 20px 20px;
-      box-shadow: var(--shadow-soft);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    header .inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: 0.03em;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 14px;
-      color: #e0e7ff;
-    }
-
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.4);
-      color: #c7d2fe;
-      width: fit-content;
-    }
-
-    .tagline span.icon {
-      font-size: 14px;
-    }
-
-    .layout {
-      max-width: 1100px;
-      margin: 20px auto 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
-      gap: 20px;
-      padding: 0 20px;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: sticky;
-      top: 110px;
-      align-self: flex-start;
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 16px;
-      max-height: calc(100vh - 130px);
-      overflow: auto;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .sidebar h2 {
-      font-size: 15px;
-      margin: 0 0 10px;
-    }
-
-    .toc {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      font-size: 13px;
-    }
-
-    .toc li {
-      margin: 4px 0;
-    }
-
-    .toc a {
-      color: var(--muted);
-      display: block;
-      padding: 4px 0;
-    }
-
-    .toc a:hover {
-      color: var(--accent);
-    }
-
-    .toc .toc-sub {
-      padding-left: 14px;
-      margin-top: 4px;
-    }
-
-    /* Search */
-    .search-box {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-    }
-
-    .search-box label {
-      font-size: 12px;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    #searchInput {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 13px;
-      outline: none;
-    }
-
-    #searchInput:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent-soft);
-    }
-
-    .search-meta {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* 모바일용 목차 토글 버튼 */
-    .toc-toggle {
-      display: none;
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #eef2ff;
-      color: #1d2a5b;
-      font-size: 13px;
-      padding: 8px 10px;
-      text-align: left;
-      cursor: pointer;
-      margin-bottom: 8px;
-    }
-
-    .toc-toggle span {
-      float: right;
-      font-size: 12px;
-    }
-
-    .sidebar-body {
-      /* 데스크톱에선 항상 보임, 모바일에서 토글 */
-    }
-
-    /* Content */
-    main {
-      background: transparent;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 22px;
-      margin-bottom: 20px;
-    }
-
-    .card h2, .card h3, .card h4 {
-      margin-top: 0;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .section-title h2 {
-      font-size: 20px;
-    }
-
-    .section-badge {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      white-space: nowrap;
-    }
-
-    h3 {
-      font-size: 16px;
-      margin-top: 18px;
-      border-left: 3px solid var(--accent);
-      padding-left: 8px;
-    }
-
-    h4 {
-      font-size: 14px;
-      margin-top: 14px;
-    }
-
-    p {
-      font-size: 14px;
-      margin: 4px 0 8px;
-    }
-
-    ul, ol {
-      padding-left: 18px;
-      margin: 4px 0 8px;
-      font-size: 14px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      margin-right: 6px;
-      margin-bottom: 4px;
-    }
-
-    .pill-muted {
-      background: #f0f2f7;
-      color: var(--muted);
-    }
-
-    .meta {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .highlight {
-      background: #fff9c4;
-    }
-
-    /* Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 6px 0 10px;
-      font-size: 13px;
-      background: #fff;
-    }
-
-    th, td {
-      border: 1px solid #e0e3eb;
-      padding: 6px 8px;
-      vertical-align: top;
-    }
-
-    th {
-      background: #f3f4fb;
-      font-weight: 600;
-      text-align: left;
-    }
-
-    .table-caption {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .badge-danger {
-      background: #fde1e1;
-      color: var(--danger);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 11px;
-    }
-
-    .badge-info {
-      background: #e0f2fe;
-      color: #0369a1;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 11px;
-    }
-
-    .note {
-      border-left: 3px solid var(--accent);
-      padding-left: 10px;
-      margin: 10px 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .callout {
-      background: #fefce8;
-      border-radius: 10px;
-      border: 1px solid #facc15;
-      padding: 10px 12px;
-      font-size: 13px;
-      margin-top: 8px;
-    }
-
-    .callout strong {
-      color: #854d0e;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin: 4px 0 8px;
-    }
-
-    .chip {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid #e0e0ea;
-      background: #f9fafb;
-      color: var(--muted);
-    }
-
-    /* Search hide */
-    .search-hidden {
-      display: none !important;
-    }
-
-    .search-summary {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .search-hit {
-      border-color: var(--accent-soft);
-      box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow-soft);
-    }
-
-    code {
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      background: #111827;
-      color: #e5e7eb;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-
-    /* =========================
-       모바일 최적화
-       ========================= */
-    @media (max-width: 900px) {
-      header {
-        position: static;
-        padding: 20px 16px 16px;
-      }
-      header .inner {
-        padding: 0;
-      }
-      header h1 {
-        font-size: 20px;
-      }
-      header p {
-        font-size: 13px;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        padding: 0 12px 20px;
-      }
-
-      .sidebar {
-        position: static;
-        max-height: none;
-        padding: 12px 12px 10px;
-        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
-        transform: none;
-      }
-
-      .toc-toggle {
-        display: block;
-      }
-
-      .sidebar-body {
-        margin-top: 4px;
-        border-top: 1px dashed var(--border);
-        padding-top: 8px;
-      }
-
-      /* 모바일에서 기본은 닫혀 있고, open 클래스일 때 열기 */
-      .sidebar:not(.open) .sidebar-body {
-        display: none;
-      }
-
-      .sidebar.open .toc-toggle {
-        background: #e0ecff;
-      }
-
-      .card {
-        padding: 16px 14px;
-        border-radius: 12px;
-      }
-
-      h3 {
-        font-size: 15px;
-      }
-
-      h4 {
-        font-size: 13px;
-      }
-
-      p, ul, ol {
-        font-size: 13px;
-      }
-
-      /* 테이블 가로 스크롤 */
-      table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        white-space: nowrap;
-      }
-
-      th, td {
-        font-size: 12px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 18px;
-      }
-      .section-title h2 {
-        font-size: 17px;
-      }
-      .section-badge {
-        display: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>51기 방송기술직 신입사원 OJT 일정</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="inner">
-      <div>
-        <div class="tagline">
-          <span class="icon">📚</span>
-          <span>방송인프라본부 · 인사/OJT 운영 기준</span>
-        </div>
-        <h1>신입사원(OJT)·수습평가 관리 매뉴얼</h1>
-        <p>51기 방송기술직 신입사원 OJT 및 수습평가 운영을 위한 표준 매뉴얼입니다. 예산·일정·평가·담당자 업무까지 한 번에 확인할 수 있습니다.</p>
-      </div>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="header-content">
+                <h1>방송인프라본부 신입사원 OJT</h1>
+                <p class="subtitle">2025.12.15.(월) ~ 2026.01.09.(금), 4주간</p>
+                <div class="badge-group">
+                    <span class="badge">51기 방송기술직</span>
+                    <span class="badge">총 18명</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 주요 안내사항 -->
+        <section class="notice-section">
+            <h2>📌 주요 안내사항</h2>
+            <div class="notice-grid">
+                <div class="notice-card urgent">
+                    <h3>⚠️ 긴급 공지</h3>
+                    <ul>
+                        <li><strong>1.9(금) 09:00</strong> - 신관5층 제3회의실</li>
+                        <li>AI 적용 아이디어 발표 (1인당 최대 10분)</li>
+                        <li>각 국 팀장급 1명 참석 필수</li>
+                        <li>발표 후 점심 식사</li>
+                        <li><span class="highlight">참석자 회신: 12.19(목)까지</span></li>
+                    </ul>
+                </div>
+                <div class="notice-card">
+                    <h3>📋 제출 사항</h3>
+                    <ul>
+                        <li>개인 사항 (알러지, 식이제한 등)</li>
+                        <li>신입사원 인적사항 [12.15(월) 퇴근 전]</li>
+                        <li>전보희망조사 [12.18(목) 출근 직후]</li>
+                        <li>업무수행 내역 [01.09(금)]</li>
+                        <li>개인별 과제 발표 자료 [01.09(금)]</li>
+                    </ul>
+                </div>
+                <div class="notice-card">
+                    <h3>✓ 출석 안내</h3>
+                    <ul>
+                        <li>근태관리 및 용모단정 철저</li>
+                        <li>지정일 08:45 인프라전략국장실 옆 회의실 집합</li>
+                        <li><strong>집합일:</strong> 12.17(수), 19(금), 22(월), 29(월), 1.5(월), 7(수)</li>
+                        <li>12.19(금) 관악산송신소 견학 (운동화 착용 권장)</li>
+                        <li>1.2(금) 시무식 참석 (격식있는 의복 착용)</li>
+                    </ul>
+                </div>
+                <div class="notice-card">
+                    <h3>📞 비상연락망</h3>
+                    <ul>
+                        <li><strong>송민재:</strong> 010-8921-6053</li>
+                        <li><strong>오종원:</strong> 010-9177-9944</li>
+                        <li><strong>인솔자:</strong> 인프라기획부 송민재</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- OJT 개요 -->
+        <section class="overview-section">
+            <h2>📖 OJT 개요</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="icon">🎯</div>
+                    <h3>목적</h3>
+                    <p>방송기술 전반에 대한 이해<br>선배들과의 유대 및 소속감 강화</p>
+                </div>
+                <div class="overview-card">
+                    <div class="icon">👥</div>
+                    <h3>대상</h3>
+                    <p>51기 방송기술직 신입사원<br>전국권 8명 / 지역권 10명</p>
+                </div>
+                <div class="overview-card">
+                    <div class="icon">📅</div>
+                    <h3>기간</h3>
+                    <p>2025.12.15.(월) ~ 2026.01.09.(금)<br>총 4주간 (18일)</p>
+                </div>
+                <div class="overview-card">
+                    <div class="icon">💰</div>
+                    <h3>예산</h3>
+                    <p>총 4,860천원<br>(1인당 15,000원 × 18일)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 주간 캘린더 -->
+        <section class="calendar-section">
+            <h2>📅 주간 일정표</h2>
+            <div class="calendar-container">
+                <!-- 12월 3주차 -->
+                <div class="week-block">
+                    <h3>12월 3주차</h3>
+                    <div class="week-grid">
+                        <div class="day-card start">
+                            <div class="date">15(월)</div>
+                            <div class="content">
+                                <span class="tag start-tag">OJT 시작</span>
+                                <p>인프라기획부</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">16(화)</div>
+                            <div class="content">
+                                <p>인프라구축부</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">17(수)</div>
+                            <div class="content">
+                                <p>미디어송출부</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">18(목)</div>
+                            <div class="content">
+                                <p>미디어송출부</p>
+                            </div>
+                        </div>
+                        <div class="day-card special">
+                            <div class="date">19(금)</div>
+                            <div class="content">
+                                <span class="tag">견학</span>
+                                <p>관악산송신소</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12월 4주차 -->
+                <div class="week-block">
+                    <h3>12월 4주차</h3>
+                    <div class="week-grid">
+                        <div class="day-card">
+                            <div class="date">22(월)</div>
+                            <div class="content">
+                                <p>제작기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">23(화)</div>
+                            <div class="content">
+                                <p>제작기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card holiday">
+                            <div class="date">24(수)</div>
+                            <div class="content">
+                                <p>성탄절</p>
+                            </div>
+                        </div>
+                        <div class="day-card holiday">
+                            <div class="date">25(목)</div>
+                            <div class="content">
+                                <p>성탄절 대체휴일</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">26(금)</div>
+                            <div class="content">
+                                <p>제작기술국</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12월 5주차 -->
+                <div class="week-block">
+                    <h3>12월 5주차 / 1월 1주차</h3>
+                    <div class="week-grid">
+                        <div class="day-card">
+                            <div class="date">29(월)</div>
+                            <div class="content">
+                                <p>송신플랫폼국</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">30(화)</div>
+                            <div class="content">
+                                <p>송신플랫폼국<br>개인 면담</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">31(수)</div>
+                            <div class="content">
+                                <p>종무식</p>
+                            </div>
+                        </div>
+                        <div class="day-card holiday">
+                            <div class="date">1/1(목)</div>
+                            <div class="content">
+                                <p>신정</p>
+                            </div>
+                        </div>
+                        <div class="day-card special">
+                            <div class="date">2(금)</div>
+                            <div class="content">
+                                <p>시무식<br>방송기술인협회<br>전략기획실<br>재난미디어센터</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1월 2주차 -->
+                <div class="week-block">
+                    <h3>1월 2주차</h3>
+                    <div class="week-grid">
+                        <div class="day-card">
+                            <div class="date">5(월)</div>
+                            <div class="content">
+                                <p>후반제작기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">6(화)</div>
+                            <div class="content">
+                                <p>후반제작기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">7(수)</div>
+                            <div class="content">
+                                <p>생방기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card">
+                            <div class="date">8(목)</div>
+                            <div class="content">
+                                <p>생방기술국</p>
+                            </div>
+                        </div>
+                        <div class="day-card end">
+                            <div class="date">9(금)</div>
+                            <div class="content">
+                                <span class="tag end-tag">OJT 종료</span>
+                                <p>AI 과제 발표<br>OJT 총평<br>마무리 인사</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 세부 일정 -->
+        <section class="detail-section">
+            <h2>📝 국별 세부 일정</h2>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('infra')">인프라전략국</button>
+                <button class="tab-btn" onclick="showTab('construct')">인프라구축부</button>
+                <button class="tab-btn" onclick="showTab('media')">미디어송출부</button>
+                <button class="tab-btn" onclick="showTab('production')">제작기술국</button>
+                <button class="tab-btn" onclick="showTab('transmission')">송신플랫폼국</button>
+                <button class="tab-btn" onclick="showTab('post')">후반제작기술국</button>
+                <button class="tab-btn" onclick="showTab('live')">생방기술국</button>
+            </div>
+
+            <div id="infra" class="tab-content active">
+                <h3>인프라전략국 (12.15 월)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:00~10:30</td>
+                            <td>인프라전략국장 인사</td>
+                            <td>-</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>10:30~12:00</td>
+                            <td>OJT 일정 안내</td>
+                            <td>박은지 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>13:30~17:30</td>
+                            <td>인프라기획부 팀별 업무 안내</td>
+                            <td>각 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>17:30~18:00</td>
+                            <td>마무리 및 OJT 추가 안내</td>
+                            <td>박은지 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="construct" class="tab-content">
+                <h3>인프라구축부 (12.16 화)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:00~10:00</td>
+                            <td>조직 구성 및 팀장소개, 분장업무 설명</td>
+                            <td>최민영 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>10:00~11:30</td>
+                            <td>NPS 구축 및 운영 업무</td>
+                            <td>나지선 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~14:00</td>
+                            <td>V/A 아카이브 구축 및 운용 업무</td>
+                            <td>김용수 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>14:00~15:00</td>
+                            <td>DRS 등 본사 파일기반 제작시스템 구축 업무</td>
+                            <td>이윤성 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>15:00~16:00</td>
+                            <td>본사 및 지역 제작 인프라 시설 구축 업무</td>
+                            <td>최민영 팀장<br>김지훈 팀장</td>
+                            <td>3회의실</td>
+                        </tr>
+                        <tr>
+                            <td>16:00~17:00</td>
+                            <td>방송장비 검사 및 보수 업무</td>
+                            <td>이태근 팀장<br>이동훈 팀장</td>
+                            <td>연구동 사무실</td>
+                        </tr>
+                        <tr>
+                            <td>17:00~18:00</td>
+                            <td>간담회</td>
+                            <td>부장 및 팀장</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="media" class="tab-content">
+                <h3>미디어송출부 (12.17 수 ~ 12.18 목)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">12.17(수)</td>
+                            <td>09:30~11:30</td>
+                            <td>회선망 시스템 구성 및 운영 등</td>
+                            <td>문창환 팀장</td>
+                            <td rowspan="4">미송부 사무실</td>
+                        </tr>
+                        <tr>
+                            <td>13:30~17:30</td>
+                            <td>베이스밴드, 헤드앤드 운영, 송출운행, APC, CMS, 광고편집실, 통합주조 소개 등</td>
+                            <td>홍우진 팀장</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">12.18(목)</td>
+                            <td>09:30~11:30</td>
+                            <td>NQC 회선, 인터컴, 라우터 등</td>
+                            <td>권현도 팀장</td>
+                        </tr>
+                        <tr>
+                            <td>13:30~17:30</td>
+                            <td>MNC 시스템 구성 및 운영 등</td>
+                            <td>강자원 팀장</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="production" class="tab-content">
+                <h3>제작기술국 (12.22 월, 12.23 화, 12.26 금)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4">12.22(월)</td>
+                            <td>09:00~09:30</td>
+                            <td>제작기술국 조직 및 역할 소개</td>
+                            <td>김제민 팀장</td>
+                            <td>국 회의실</td>
+                        </tr>
+                        <tr>
+                            <td>09:30~11:00</td>
+                            <td>제작기술국 소개 및 OJT 일정 설명</td>
+                            <td>김제민 팀장</td>
+                            <td>국 회의실</td>
+                        </tr>
+                        <tr>
+                            <td>11:00~12:00</td>
+                            <td>제작기술국 시스템 업무 소개</td>
+                            <td>-</td>
+                            <td>시스템실</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~18:00</td>
+                            <td>영상 업무의 이해</td>
+                            <td>이광호 팀장</td>
+                            <td>본관 TS</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">12.23(화)</td>
+                            <td>09:00~12:00</td>
+                            <td>음향 업무의 이해</td>
+                            <td>송근영 팀장<br>임영재 팀장</td>
+                            <td>국 회의실</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~18:00</td>
+                            <td>조명 업무의 이해</td>
+                            <td>송재윤 팀장<br>김미소 직원</td>
+                            <td>본관TS, 공개홀</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">12.26(금)</td>
+                            <td>09:00~11:00</td>
+                            <td>KBS홀 견학</td>
+                            <td>양정화 팀장</td>
+                            <td>KBS홀</td>
+                        </tr>
+                        <tr>
+                            <td>11:00~12:00</td>
+                            <td>50기 선배와의 만남</td>
+                            <td>오현석 직원</td>
+                            <td>국 회의실</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~18:00</td>
+                            <td>중계 업무의 이해</td>
+                            <td>장건호 팀장</td>
+                            <td>중계 차고지</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="transmission" class="tab-content">
+                <h3>송신플랫폼국 (12.29 월 ~ 12.30 화)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4">12.29(월)</td>
+                            <td>09:00~10:00</td>
+                            <td>티타임</td>
+                            <td>김영삼 부장</td>
+                            <td rowspan="4">국 회의실</td>
+                        </tr>
+                        <tr>
+                            <td>10:00~12:00</td>
+                            <td>전국 송신시설 현황</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~17:30</td>
+                            <td>각 팀별 소개</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>17:30~18:00</td>
+                            <td>질의 응답, 30일 일정 소개</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">12.30(화)</td>
+                            <td>오전</td>
+                            <td>소래송신소, 백련TVR, 장위TVR 견학</td>
+                            <td>-</td>
+                            <td>현장</td>
+                        </tr>
+                        <tr>
+                            <td>오후</td>
+                            <td>소래송신소, 불광TVR, 장위TVR 견학</td>
+                            <td>-</td>
+                            <td>현장</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="post" class="tab-content">
+                <h3>후반제작기술국 (1.5 월 ~ 1.6 화)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">1.5(월)</td>
+                            <td>자율</td>
+                            <td>DI, 마스터링 개요, 색보정 기초, 마스터 QC</td>
+                            <td>강지혜 팀장</td>
+                            <td rowspan="3">미정</td>
+                        </tr>
+                        <tr>
+                            <td>자율</td>
+                            <td>XR·TM 운영, 카메라트래킹, XR/VR 스테이지 투어, AI 제작</td>
+                            <td>김태환 팀장</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">1.6(화)</td>
+                            <td>오전</td>
+                            <td>SMR 현업</td>
+                            <td>허창열 팀장</td>
+                        </tr>
+                        <tr>
+                            <td>오후</td>
+                            <td>종편 후반제작, 편집 워크플로우</td>
+                            <td>황현식 팀장</td>
+                            <td>미정</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="live" class="tab-content">
+                <h3>생방기술국 (1.7 수 ~ 1.8 목)</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>시간</th>
+                            <th>교육주제</th>
+                            <th>담당자</th>
+                            <th>장소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4">1.7(수)</td>
+                            <td>09:00~09:30</td>
+                            <td>OT</td>
+                            <td>정진효 직원</td>
+                            <td rowspan="4">현장</td>
+                        </tr>
+                        <tr>
+                            <td>09:30~09:50</td>
+                            <td>뉴스 ST 견학 / 라온 및 재난 ST 견학</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~15:00</td>
+                            <td>라온 및 재난 ST 견학 / 뉴스 ST 견학</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:00~16:50</td>
+                            <td>1R 뉴스부조/ 월드24뉴스/ 사사건건 참관</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6">1.8(목)</td>
+                            <td>09:30~10:00</td>
+                            <td>아이스브레이킹</td>
+                            <td>김정규 팀장<br>박은지 직원</td>
+                            <td rowspan="6">현장</td>
+                        </tr>
+                        <tr>
+                            <td>10:00~11:30</td>
+                            <td>업무현황 및 직무별 업무 소개</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:00~14:30</td>
+                            <td>라디오 스튜디오 견학 및 시설 설명</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>14:30~15:30</td>
+                            <td>생방 스튜디오 견학 및 시설 설명</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:30~16:00</td>
+                            <td>스튜디오 콩 견학 및 시설 설명</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>16:00~17:00</td>
+                            <td>라디오 주조 견학 및 시설 설명</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 평가 안내 -->
+        <section class="evaluation-section">
+            <h2>📊 수습평가 안내</h2>
+            <div class="eval-grid">
+                <div class="eval-card">
+                    <h3>평가 목적</h3>
+                    <p>직무에 대한 전문지식, 경험, 자질 및 적성을 평가하여 수습기간 종료 시 수습기간 연장 또는 임용 취소 여부를 판단</p>
+                </div>
+                <div class="eval-card">
+                    <h3>평가 기간</h3>
+                    <p>2025.12.01. ~ 2026.02.28. (3개월)</p>
+                </div>
+                <div class="eval-card">
+                    <h3>평가 비율</h3>
+                    <ul>
+                        <li>집체연수 평가: 20%</li>
+                        <li>OJT 부서장 평가: 30%</li>
+                        <li>배치 부서장 평가: 50%</li>
+                    </ul>
+                </div>
+                <div class="eval-card">
+                    <h3>평가 요소</h3>
+                    <ul>
+                        <li><strong>직무수행태도:</strong> 책임감, 적극성, 협조성, 순응성, 품성</li>
+                        <li><strong>직무수행능력:</strong> 직무지식, 이해판단력, 기획독창력, 추진력</li>
+                        <li><strong>기타:</strong> 건강상태, 발전성</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="eval-scale">
+                <h3>평가 등급</h3>
+                <div class="scale-grid">
+                    <div class="scale-item s">탁월(S): 100~96점</div>
+                    <div class="scale-item a">우수(A): 95~86점</div>
+                    <div class="scale-item b">양호(B): 85~71점</div>
+                    <div class="scale-item c">보통(C): 70~51점</div>
+                    <div class="scale-item d">부족(D): 50~0점</div>
+                </div>
+                <p class="eval-note"><strong>※ 주의:</strong> 평가결과 평균 60점 이하 시 수습기간 연장 또는 임용 취소 가능</p>
+                <p class="eval-deadline"><strong>평가 제출 기한:</strong> 2026.02.13.(금)까지 인사운영부로 제출</p>
+            </div>
+        </section>
+
+        <!-- AI 과제 안내 -->
+        <section class="ai-section">
+            <h2>🤖 AI 과제 발표</h2>
+            <div class="ai-content">
+                <div class="ai-card">
+                    <h3>발표 정보</h3>
+                    <ul>
+                        <li><strong>일시:</strong> 2026.01.09.(금) 오전 9시</li>
+                        <li><strong>장소:</strong> 신관5층 제3회의실</li>
+                        <li><strong>주제:</strong> 방송기술+AI - 현장 적용 아이디어 제안</li>
+                        <li><strong>시간:</strong> 1인당 최대 10분 (총 18명)</li>
+                        <li><strong>배경:</strong> AI PTZ 시스템, AI Cam Bot, VFX&AI 영상제작, AI 화질개선 등 현황 소개</li>
+                    </ul>
+                </div>
+                <div class="ai-card">
+                    <h3>참석 대상</h3>
+                    <ul>
+                        <li>각 국 팀장급 1명 참석 필수</li>
+                        <li>발표 후 점심 식사 진행</li>
+                        <li><strong class="highlight">참석자 회신: 12월 19일(목)까지</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 참고 문서 -->
+        <section class="documents-section">
+            <h2>📎 관련 문서</h2>
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h3>OJT 계획</h3>
+                    <p>인프라전략국-2099(2025.12.10.)</p>
+                    <a href="신입사원OJT자료_12월15일_.pptx" download class="doc-link">다운로드</a>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">📋</div>
+                    <h3>수습평가 계획</h3>
+                    <p>평가표 및 근거자료 양식</p>
+                    <p class="doc-note">첨부1, 첨부2 파일 작성 후 제출</p>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">💰</div>
+                    <h3>예산 요청</h3>
+                    <p>총 4,860천원</p>
+                    <p class="doc-note">1006002 / B-000980.0004 / 652000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p><strong>방송인프라본부 인프라전략국 인프라기획부</strong></p>
+                <p>담당자: 송민재 (010-8921-6053) | 오종원 (010-9177-9944)</p>
+                <p class="footer-date">문서 작성: 2025.12.12.(금)</p>
+            </div>
+        </footer>
     </div>
-  </header>
 
-  <div class="layout">
-    <!-- Sidebar / TOC -->
-    <aside class="sidebar">
-      <button class="toc-toggle" type="button">
-        📑 목차 / 검색 열기
-        <span>▼</span>
-      </button>
-
-      <div class="sidebar-body">
-        <h2>목차</h2>
-        <ul class="toc">
-          <li><a href="#sec-1">1. 관련 근거 및 기본 정보</a></li>
-          <li>
-            <a href="#sec-2">2. OJT 운영 개요</a>
-            <ul class="toc toc-sub">
-              <li><a href="#sec-2-1">2-1. 목적·기간·대상·장소</a></li>
-              <li><a href="#sec-2-2">2-2. 예산 및 집행</a></li>
-              <li><a href="#sec-2-3">2-3. 주요 프로그램 구성</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#sec-3">3. OJT 일정 구조</a>
-            <ul class="toc toc-sub">
-              <li><a href="#sec-3-1">3-1. 주간 일정 개요(캘린더)</a></li>
-              <li><a href="#sec-3-2">3-2. 국·부별 세부 일정</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#sec-4">4. 수습직원 평가 계획</a>
-            <ul class="toc toc-sub">
-              <li><a href="#sec-4-1">4-1. 평가 목적 및 기간</a></li>
-              <li><a href="#sec-4-2">4-2. 평가 체계 및 시기</a></li>
-              <li><a href="#sec-4-3">4-3. 평가 요소·등급·점수 산출</a></li>
-              <li><a href="#sec-4-4">4-4. 평가 결과 적용 기준</a></li>
-            </ul>
-          </li>
-          <li><a href="#sec-5">5. 담당자별 업무 체크리스트</a></li>
-          <li><a href="#sec-6">6. 이메일·문서 템플릿 요약</a></li>
-          <li><a href="#sec-7">7. 검색·운영 팁</a></li>
-        </ul>
-
-        <div class="search-box">
-          <label for="searchInput">🔍 매뉴얼 내 검색 (키워드)</label>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="예: 수습평가표, 관악산송신소, 생방기술국, 평가기간..."
-          />
-          <div class="search-meta" id="searchMeta">
-            전체 섹션이 표시됩니다.
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Main content -->
-    <main>
-      <!-- 1. 관련 근거 및 기본정보 -->
-      <section class="card" id="sec-1" data-searchable>
-        <div class="section-title">
-          <h2>1. 관련 근거 및 기본 정보</h2>
-          <span class="section-badge">문서·근거</span>
-        </div>
-
-        <h3>1-1. 관련 공문</h3>
-        <ul>
-          <li>
-            <strong>문서번호</strong> : 인프라전략국-2099 (2025.12.10.)<br />
-            <strong>제목</strong> : 「51기 방송기술직 신입사원 OJT 실시」
-          </li>
-        </ul>
-
-        <h3>1-2. 본 매뉴얼 적용 범위</h3>
-        <ul>
-          <li>대상 기수 : <strong>51기 방송기술직 신입사원</strong></li>
-          <li>해당 본부 : <strong>방송인프라본부</strong> (인프라전략국, 제작기술국, 송신플랫폼국, 후반제작기술국, 생방기술국 등 연계)</li>
-          <li>적용 기간
-            <ul>
-              <li>OJT 운영 기간 : 2025.12.15.(월) ~ 2026.01.09.(금)</li>
-              <li>수습평가 기간 : 2025.12.01. ~ 2026.02.28.</li>
-            </ul>
-          </li>
-        </ul>
-
-        <h3>1-3. 주요 담당 부서 및 역할</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>구분</th>
-              <th>부서/담당</th>
-              <th>주요 역할</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>총괄</td>
-              <td>인프라전략국 · 인프라기획부</td>
-              <td>OJT 전체 기획, 일정 조정, 예산 요청 및 집행 계획 수립, 평가 관련 안내 및 취합</td>
-            </tr>
-            <tr>
-              <td>현장 교육</td>
-              <td>인프라구축부, 미디어송출부, 제작기술국, 송신플랫폼국, 후반제작기술국, 생방기술국 등</td>
-              <td>국·부별 현장 교육, 시설 견학, 실습 및 부서 소개, OJT 기간 중 부서 평가 작성</td>
-            </tr>
-            <tr>
-              <td>인사·평가</td>
-              <td>인사운영부</td>
-              <td>수습평가 기준 수립, 집체연수 결과 및 부서평가 취합, 수습해제 심사 및 임용 관련 조치</td>
-            </tr>
-            <tr>
-              <td>교육</td>
-              <td>인재개발원</td>
-              <td>수습직원 집합연수 및 평가 결과 인사운영부 제출</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="note">
-          <strong>참고:</strong> 해당 매뉴얼은 51기 기준으로 작성되었으며, 향후 기수에도 동일 구조를 사용하되 날짜·인원·예산·참여부서만 변경하여 재사용할 수 있습니다.
-        </div>
-      </section>
-
-      <!-- 2. OJT 운영 개요 -->
-      <section class="card" id="sec-2" data-searchable>
-        <div class="section-title">
-          <h2>2. OJT 운영 개요</h2>
-          <span class="section-badge">OJT 설계</span>
-        </div>
-
-        <section id="sec-2-1" data-searchable>
-          <h3>2-1. 목적·기간·대상·장소</h3>
-
-          <h4>① OJT 목적</h4>
-          <ul>
-            <li>51기 방송기술직 신입사원의 <strong>방송기술 전반에 대한 이해도 제고</strong></li>
-            <li>본사 및 지역 간 인프라 연계, 업무 협조 체계에 대한 <strong>현장 이해</strong></li>
-            <li>각 국(부)의 업무 특성 및 실제 방송 제작·송출 흐름 파악</li>
-            <li>선배들과의 <strong>유대감 및 소속감 형성</strong>을 통한 조직 적응 지원</li>
-            <li><strong>AI 등 신기술 적용 현황</strong> 학습 및 “방송기술 + AI” 아이디어 발굴</li>
-          </ul>
-
-          <h4>② 기간 및 일정</h4>
-          <ul>
-            <li><strong>OJT 기간</strong> : 2025.12.15.(월) ~ 2026.01.09.(금), 총 4주</li>
-            <li>OJT 운영일수 : 총 18일</li>
-            <li>신입사원 정식 발령 : 2026.01.12.(월)</li>
-          </ul>
-
-          <h4>③ 대상 및 인원</h4>
-          <ul>
-            <li>51기 방송기술직 신입사원 총 <strong>18명</strong>
-              <ul>
-                <li>전국권 : 8명</li>
-                <li>지역권 : 10명</li>
-              </ul>
-            </li>
-          </ul>
-
-          <h4>④ 장소 및 인솔자</h4>
-          <ul>
-            <li>장소 : 일정별 각 국(부) 지정 교육실 및 현장 견학지
-              <ul>
-                <li>인프라전략국 회의실, 연구동 사무실</li>
-                <li>미디어송출부, 제작기술국 회의실, 본관 TS, KBS홀 등</li>
-                <li>송신플랫폼국 회의실, 관악산 송신소, 소래송신소, TVR 등</li>
-              </ul>
-            </li>
-            <li>인솔자 : <strong>인프라기획부 송민재</strong> (담당자 연락처: 010-XXXX-XXXX, 실제 매뉴얼 작성 시 최신 연락처 기입)</li>
-          </ul>
-        </section>
-
-        <section id="sec-2-2" data-searchable>
-          <h3>2-2. OJT 예산 및 집행 계획</h3>
-
-          <h4>① 예산 산출근거</h4>
-          <ul>
-            <li>1인당 OJT 소요예산 : <strong>15,000원</strong></li>
-            <li>교육기간 : <strong>18일</strong></li>
-            <li>대상 인원 : <strong>18명</strong></li>
-          </ul>
-          <p>
-            <strong>총 소요예산</strong> = 18명 × 15,000원 × 18일 = <strong>4,860,000원</strong> (4,860천원)
-          </p>
-
-          <h4>② 예산 코드 및 추가 배정 요청</h4>
-          <ul>
-            <li><strong>추가배정 요청 금액</strong> : 4,860천원</li>
-            <li>예산 항목
-              <ul>
-                <li>기능 분류 : 기술기획운영/기타지원-기술기획운영/회의비-대내</li>
-                <li>세부 코드 : <code>1006002 / B-000980.0004 / 652000</code></li>
-              </ul>
-            </li>
-          </ul>
-
-          <h4>③ 집행 방법</h4>
-          <ul>
-            <li>OJT 기간 중 발생하는 회의비·간담회비·식비 등 OJT 관련 비용을 위 예산에서 집행</li>
-            <li>OJT 일정이 연도를 걸치는 경우 (<strong>2025년~2026년</strong>)</li>
-          </ul>
-          <div class="callout">
-            <strong>2026년도 집행 예정분</strong>에 대해서는 해당 연도 예산에 대해 별도 추가배정 요청을 실시해야 합니다.
-          </div>
-        </section>
-
-        <section id="sec-2-3" data-searchable>
-          <h3>2-3. OJT 주요 프로그램 구성</h3>
-
-          <h4>① 국(부)별 현장 중심 커리큘럼</h4>
-          <ul>
-            <li>각 국(부)별 지정된 기간 동안, 자체 기획한 OJT 커리큘럼 운영</li>
-            <li>주요 내용
-              <ul>
-                <li>부서별 업무 소개 및 조직 구조 이해</li>
-                <li>주요 시스템·장비·시설 견학 및 실습</li>
-                <li>실제 방송 제작 및 송출 현장 프로세스 체험</li>
-              </ul>
-            </li>
-          </ul>
-
-          <h4>② 방송기술 + AI 프로그램</h4>
-          <ul>
-            <li>방송현장 AI 신기술 적용 사례 소개
-              <ul>
-                <li>AI PTZ 시스템</li>
-                <li>AI Cam Bot</li>
-                <li>VFX &amp; AI 영상 제작</li>
-                <li>AI 화질 개선 등</li>
-              </ul>
-            </li>
-            <li>조별 “<strong>방송기술 + AI</strong>” 과제 수행 및 발표
-              <ul>
-                <li>발표일 : <strong>2026.01.09.(금)</strong></li>
-                <li>내용 : AI 기술의 방송 현장 적용 아이디어 발굴 및 토의</li>
-              </ul>
-            </li>
-          </ul>
-
-          <h4>③ 주요 시설 견학</h4>
-          <ul>
-            <li>관악산송신소 견학 (2025.12.19.(금))</li>
-            <li>소래송신소, 백련TVR, 불광TVR, 장위TVR 견학 (송신플랫폼국 일정 내)</li>
-            <li>KBS홀 견학 및 스튜디오·주조·스테이지 등 투어</li>
-          </ul>
-
-          <h4>④ 조직 문화 및 소통 프로그램</h4>
-          <ul>
-            <li>선배(50기)와의 만남, 선배·후배 간 간담회</li>
-            <li>팀장·부서장 면담(개인 면담 포함)</li>
-            <li>OJT 총평 및 피드백 공유</li>
-          </ul>
-        </section>
-      </section>
-
-      <!-- 3. OJT 일정 구조 -->
-      <section class="card" id="sec-3" data-searchable>
-        <div class="section-title">
-          <h2>3. OJT 일정 구조</h2>
-          <span class="section-badge">일정·캘린더</span>
-        </div>
-
-        <section id="sec-3-1" data-searchable>
-          <h3>3-1. 주간 일정 개요(캘린더형)</h3>
-          <p class="table-caption">※ 실제 캘린더 이미지를 연동할 경우 이 표를 기준으로 만들어 사용할 수 있습니다.</p>
-          <table>
-            <thead>
-              <tr>
-                <th>주차</th>
-                <th>기간</th>
-                <th>핵심 내용</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1주차</td>
-                <td>12.15.(월) ~ 12.19.(금)</td>
-                <td>
-                  <ul>
-                    <li>OJT 시작</li>
-                    <li>인프라전략국/인프라기획부, 인프라구축부, 미디어송출부 OJT</li>
-                    <li>관악산송신소 견학</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>2주차</td>
-                <td>12.22.(월) ~ 12.26.(금)</td>
-                <td>
-                  <ul>
-                    <li>제작기술국 OJT (영상·음향·조명·중계, KBS홀 견학)</li>
-                    <li>성탄절(25일) 휴무</li>
-                    <li>제작기술국 OJT 총평</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>3주차</td>
-                <td>12.29.(월) ~ 01.02.(금)</td>
-                <td>
-                  <ul>
-                    <li>송신플랫폼국 OJT</li>
-                    <li>송신소·TVR 현장 견학, 개인 면담, 종무식, 시무식</li>
-                    <li>방송기술인협회, 전략기획실, 재난미디어센터 교육</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>4주차</td>
-                <td>01.05.(월) ~ 01.09.(금)</td>
-                <td>
-                  <ul>
-                    <li>후반제작기술국, 생방기술국 OJT</li>
-                    <li>AI 과제 발표, OJT 총평 및 마무리</li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="note">
-            <strong>일정 변경 시 주의:</strong> 국별 OJT 기간이 변경되면, 반드시 수습평가 대상 기간(특히 OJT 부서장 평가 기간 12.15~01.09)과 충돌이 없는지 확인해야 합니다.
-          </div>
-        </section>
-
-        <section id="sec-3-2" data-searchable>
-          <h3>3-2. 국·부별 세부 일정 (요약표)</h3>
-
-          <h4>① 인프라전략국 · 인프라기획부 (12.15~16)</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>일자</th>
-                <th>시간</th>
-                <th>주요 내용</th>
-                <th>담당자</th>
-                <th>장소</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>12.15(월)</td>
-                <td>09:00~10:30</td>
-                <td>인프라전략국장 인사</td>
-                <td>-</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.15(월)</td>
-                <td>10:30~12:00</td>
-                <td>OJT 일정 안내</td>
-                <td>박은지 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.15(월)</td>
-                <td>13:30~17:30</td>
-                <td>인프라기획부 팀별 업무 소개</td>
-                <td>각 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.15(월)</td>
-                <td>17:30~18:00</td>
-                <td>마무리 및 OJT 추가 안내</td>
-                <td>박은지 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>09:00~10:00</td>
-                <td>조직 구성 및 팀장 소개, 분장업무 설명</td>
-                <td>최민영 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>10:00~11:30</td>
-                <td>NPS 구축 및 운영 업무 소개</td>
-                <td>나지선 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>13:00~14:00</td>
-                <td>V/A 아카이브 구축 및 운용</td>
-                <td>김용수 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>14:00~15:00</td>
-                <td>DRS 등 파일기반 제작시스템 구축 업무</td>
-                <td>이윤성 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>15:00~16:00</td>
-                <td>본사 및 지역 제작 인프라 시설 구축</td>
-                <td>최민영 팀장, 김지훈 팀장</td>
-                <td>3회의실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>16:00~17:00</td>
-                <td>방송장비 검사 및 보수</td>
-                <td>이태근 팀장, 이동훈 팀장</td>
-                <td>연구동 사무실</td>
-              </tr>
-              <tr>
-                <td>12.16(화)</td>
-                <td>17:00~18:00</td>
-                <td>간담회</td>
-                <td>부장 및 팀장</td>
-                <td>연구동 사무실</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h4>② 미디어송출부 (12.17~18)</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>일자</th>
-                <th>시간</th>
-                <th>주요 내용</th>
-                <th>담당자</th>
-                <th>장소</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>12.17(수)</td>
-                <td>09:30~11:30</td>
-                <td>회선망 시스템 구성 및 운영</td>
-                <td>문창환 팀장</td>
-                <td>미송부 사무실</td>
-              </tr>
-              <tr>
-                <td>12.17(수)</td>
-                <td>13:30~17:30</td>
-                <td>베이스밴드, 헤드앤드, 송출운행, APC, CMS, 광고편집실, 통합주조 소개</td>
-                <td>홍우진 팀장</td>
-                <td>미송부 사무실</td>
-              </tr>
-              <tr>
-                <td>12.18(목)</td>
-                <td>09:30~11:30</td>
-                <td>NQC 회선, 인터컴, 라우터 등</td>
-                <td>권현도 팀장</td>
-                <td>미송부</td>
-              </tr>
-              <tr>
-                <td>12.18(목)</td>
-                <td>13:30~17:30</td>
-                <td>MNC 시스템 구성 및 운영</td>
-                <td>강자원 팀장</td>
-                <td>미송부</td>
-              </tr>
-              <tr>
-                <td>12.19(금)</td>
-                <td>10:00~17:00</td>
-                <td>관악산 송신소 견학</td>
-                <td>송민재, 오종원</td>
-                <td>관악산 송신소</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h4>③ 제작기술국 (12.22~26)</h4>
-          <p class="table-caption">※ 세부 일정은 축약 기재, 실제 운영 시 제작기술국 일정표를 별도 첨부.</p>
-          <ul>
-            <li>조직 및 역할 소개, OJT 일정 설명</li>
-            <li>제작기술국 시스템 업무 소개</li>
-            <li>영상·음향·조명 업무 이해 및 현장 실습</li>
-            <li>KBS홀 견학 및 50기 선배와의 만남</li>
-            <li>중계 업무 이해, OJT 총평</li>
-          </ul>
-
-          <h4>④ 송신플랫폼국 (12.29~01.02)</h4>
-          <ul>
-            <li>전국 송신시설 현황 소개</li>
-            <li>각 팀별 업무 소개</li>
-            <li>소래송신소, 백련·불광·장위 TVR 견학</li>
-            <li>개인 면담 및 종무식 참석</li>
-            <li>전략기획실, 재난미디어센터 교육, 방송기술인협회 식사</li>
-          </ul>
-
-          <h4>⑤ 후반제작기술국 &amp; 생방기술국 (01.05~09)</h4>
-          <ul>
-            <li>DI, 마스터링, 색보정 기초, 마스터 QC</li>
-            <li>XR·TM 운영, 카메라트래킹, XR/VR 스테이지 투어, AI 제작</li>
-            <li>생방 스튜디오/라디오 스튜디오/주조 견학</li>
-            <li>뉴스 스튜디오 및 뉴스 프로그램 참관</li>
-            <li>AI 과제 발표, OJT 총평 및 마무리</li>
-          </ul>
-        </section>
-      </section>
-
-      <!-- 4. 수습직원 평가 계획 -->
-      <section class="card" id="sec-4" data-searchable>
-        <div class="section-title">
-          <h2>4. 수습직원 평가 계획</h2>
-          <span class="section-badge">평가·인사</span>
-        </div>
-
-        <section id="sec-4-1" data-searchable>
-          <h3>4-1. 평가 목적 및 기간</h3>
-
-          <h4>① 평가 목적</h4>
-          <ul>
-            <li>직무에 대한 전문지식, 경험, 자질 및 적성 평가</li>
-            <li>수습기간 종료 시
-              <ul>
-                <li>수습해제(정식 임용)</li>
-                <li>수습기간 연장</li>
-                <li>임용 취소 여부</li>
-              </ul>
-              를 결정하기 위한 근거 마련
-            </li>
-          </ul>
-
-          <h4>② 평가 기간</h4>
-          <ul>
-            <li><strong>평가 전체 기간</strong> : 2025.12.01. ~ 2026.02.28. (3개월)</li>
-            <li>세부
-              <ul>
-                <li>집체연수 평가 : 2025.12.01. ~ 2025.12.12.</li>
-                <li>OJT 부서장 평가 기간 : 2025.12.15. ~ 2026.01.09.</li>
-                <li>배치부서장 평가 기간 : 2026.01.12. ~ 2026.02.28.</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-
-        <section id="sec-4-2" data-searchable>
-          <h3>4-2. 평가 체계 및 시기</h3>
-
-          <h4>① 평가 흐름도</h4>
-          <p>집체교육 평가(인재개발원) → 부서 평가(OJT, 배치부서) → 인사운영부 수습해제 심사 → 사장 수습해제 결재</p>
-
-          <h4>② 평가 유형별 반영 비율 (방송기술직 기준)</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>구분</th>
-                <th>평가유형</th>
-                <th>평가기간</th>
-                <th>평가자</th>
-                <th>비율</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>①</td>
-                <td>집체연수 평가 (인재개발원)</td>
-                <td>25.12.01. ~ 25.12.12.</td>
-                <td>강사, 인재개발원장</td>
-                <td>20%</td>
-              </tr>
-              <tr>
-                <td>②</td>
-                <td>OJT 부서장 평가</td>
-                <td>25.12.15. ~ 26.01.09.</td>
-                <td>OJT 기간 중 각 부서장</td>
-                <td>30%</td>
-              </tr>
-              <tr>
-                <td>③</td>
-                <td>배치부서장 평가</td>
-                <td>26.01.12. ~ 26.02.28.</td>
-                <td>배치부서장</td>
-                <td>50%</td>
-              </tr>
-              <tr>
-                <td colspan="4"><strong>합계 (종합평점)</strong></td>
-                <td><strong>100%</strong></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="callout">
-            <strong>중요:</strong> 평가결과(수습평가표, 평가 근거자료)는 <strong>2026.02.13.(금)</strong>까지 인사운영부로 제출해야 합니다.
-          </div>
-        </section>
-
-        <section id="sec-4-3" data-searchable>
-          <h3>4-3. 평가 요소·등급·점수 산출</h3>
-
-          <h4>① 평가 요소</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>구분</th>
-                <th>평가요소</th>
-                <th>세부 내용</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>직무수행태도</td>
-                <td>책임감, 적극성, 협조성, 순응성, 품성</td>
-                <td>출퇴근, 지시이행, 팀워크, 규정 준수, 대인관계 등</td>
-              </tr>
-              <tr>
-                <td>직무수행능력</td>
-                <td>직무지식, 이해·판단력, 기획·독창력, 추진력</td>
-                <td>업무 이해도, 문제해결 능력, 새로운 시도, 업무 추진력 등</td>
-              </tr>
-              <tr>
-                <td>기타</td>
-                <td>건강상태, 발전성</td>
-                <td>근무 지속 가능성, 성장 가능성, 자기계발 태도 등</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h4>② 평가등급 및 점수 구간</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>등급</th>
-                <th>배점 범위</th>
-                <th>의미</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>탁월(S)</td>
-                <td>96점 ~ 100점</td>
-                <td>기대 이상의 성과, 탁월한 수습</td>
-              </tr>
-              <tr>
-                <td>우수(A)</td>
-                <td>86점 ~ 95점</td>
-                <td>충분히 우수한 수준, 신뢰 가능한 수행</td>
-              </tr>
-              <tr>
-                <td>양호(B)</td>
-                <td>71점 ~ 85점</td>
-                <td>무난한 수준, 개선 여지는 있으나 적격</td>
-              </tr>
-              <tr>
-                <td>보통(C)</td>
-                <td>51점 ~ 70점</td>
-                <td>기본 수준, 향후 교육·지도 필요</td>
-              </tr>
-              <tr>
-                <td>부족(D)</td>
-                <td>0점 ~ 50점</td>
-                <td><span class="badge-danger">수습연장 또는 부적격 검토 필요</span></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="callout">
-            <strong>S, D 등급은 반드시 구체적인 사유를 평가서에 명시해야 합니다.</strong><br />
-            (예: S - 탁월한 프로젝트 리더십 발휘, D - 반복적인 규정 위반 등)
-          </div>
-
-          <h4>③ 점수 산출 방식</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>구분</th>
-                <th>배점</th>
-                <th>산출 방법</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>집체교육 평가</td>
-                <td>20점</td>
-                <td>평가항목별 점수를 합산 → 100점 만점 환산 → 점수 × 0.2</td>
-              </tr>
-              <tr>
-                <td>부서평가 (OJT·배치)</td>
-                <td>80점</td>
-                <td>평가항목별 점수를 합산 → 100점 만점 환산 → 점수 × 0.8<br />※ 방송기술 등 OJT 부서장 평가를 받는 분야는 별도 비율 적용 가능</td>
-              </tr>
-              <tr>
-                <td><strong>합계 (종합평점)</strong></td>
-                <td><strong>100점</strong></td>
-                <td>-</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="sec-4-4" data-searchable>
-          <h3>4-4. 평가 결과 적용 기준</h3>
-
-          <h4>① 수습해제 및 임용</h4>
-          <ul>
-            <li>평가결과를 토대로 수습해제 결정 후 직급 및 호봉 부여</li>
-            <li>수습해제일 : 2026.03.01. (예시 기준)</li>
-          </ul>
-
-          <h4>② 수습기간 연장·임용 취소 사유</h4>
-          <ul>
-            <li>평균 점수 <strong>60점 이하</strong>인 경우</li>
-            <li>평가자 및 확인자가 “수습 연장 필요” 의견을 낸 경우</li>
-            <li>공사의 명예를 훼손하거나 공직자로서의 품위를 손상한 경우</li>
-          </ul>
-
-          <div class="callout">
-            <strong>주의:</strong> 수습기간 연장 및 임용 취소는 <strong>중앙인사위원회 심의</strong>를 거친 후 결정합니다.
-          </div>
-        </section>
-      </section>
-
-      <!-- 5. 담당자별 체크리스트 -->
-      <section class="card" id="sec-5" data-searchable>
-        <div class="section-title">
-          <h2>5. 담당자별 업무 체크리스트</h2>
-          <span class="section-badge">실무 가이드</span>
-        </div>
-
-        <h3>5-1. 인프라기획부 (총괄 담당)</h3>
-        <ul>
-          <li>OJT 전체 일정 수립 및 각 국(부)와 일정 조율</li>
-          <li>OJT 예산 산출, 예산 추가 배정 공문 작성 및 상신</li>
-          <li>신입사원 OJT 실시 계획(안) 작성 및 배포</li>
-          <li>OJT 세부 일정표 취합 및 최종 확정본 관리</li>
-          <li>수습평가 관련 인사운영부 및 각 부서 안내 메일 발송</li>
-          <li>AI 과제 발표회 및 OJT 종료 행사 진행 총괄</li>
-        </ul>
-
-        <h3>5-2. 각 국(부) OJT 담당자</h3>
-        <ul>
-          <li>국·부별 OJT 커리큘럼(업무 소개, 견학, 실습 등) 설계</li>
-          <li>일정표(일자·시간·장소·담당자·주제) 작성 후 인프라기획부 공유</li>
-          <li>신입사원 출결 관리 및 주요 교육 내용 기록</li>
-          <li>OJT 종료 후, <strong>OJT 부서장 평가표 작성 및 1주일 내 회신</strong></li>
-        </ul>
-
-        <h3>5-3. 수습평가 관련 실무자</h3>
-        <p class="table-caption">※ “중요메일/긴급메일” 내용 기반 체크리스트</p>
-        <ul>
-          <li>인력관리실(인사운영부)에서 배포한 <strong>「2025년 수습직원 평가계획 안내문」</strong> 정독</li>
-          <li>첨부1(수습평가표), 첨부2(평가 근거자료) 양식 확인</li>
-          <li>각 수습직원별 파일을 작성·관리할 수 있도록 폴더 구조 구성</li>
-          <li>부서별 OJT가 끝난 후 1주일 내에
-            <ul>
-              <li>수습평가표 작성</li>
-              <li>평가 근거자료(세부의견) 첨부</li>
-              <li>인사운영부로 회신</li>
-            </ul>
-          </li>
-        </ul>
-
-        <h3>5-4. AI 과제 발표 관련 담당자</h3>
-        <ul>
-          <li>발표일 : 2026.01.09.(금) 오전 9시</li>
-          <li>장소 : 신관 5층 제3회의실</li>
-          <li>발표자 : 51기 신입사원 18명 (1인당 최대 10분)</li>
-          <li>참석 대상 : 각 국 팀장급 1명 이상, 기타 희망 인원</li>
-          <li>참석자 회신 마감 : 2025.12.19.</li>
-          <li>발표 후 오찬(점심 식사) 준비 및 참석 독려</li>
-        </ul>
-      </section>
-
-      <!-- 6. 이메일·문서 템플릿 요약 -->
-      <section class="card" id="sec-6" data-searchable>
-        <div class="section-title">
-          <h2>6. 이메일·문서 템플릿 요약</h2>
-          <span class="section-badge">템플릿</span>
-        </div>
-
-        <h3>6-1. 수습직원 평가계획 안내 메일(요약 구조)</h3>
-        <div class="chip-row">
-          <span class="chip">제목: 수습직원 평가계획 안내</span>
-          <span class="chip">수신: 각 국(부) OJT 담당자 및 부서장</span>
-        </div>
-        <ul>
-          <li>인사말 및 OJT 진행에 대한 감사 인사</li>
-          <li>OJT 기간(12.15~01.09) 및 평가 필요성 안내</li>
-          <li>“2025년 수습직원 평가계획 안내문” 숙지 요청</li>
-          <li>첨부파일 설명
-            <ul>
-              <li>첨부1 : 수습평가표 (직원별 개별 파일)</li>
-              <li>첨부2 : 수습평가 세부 근거자료 양식</li>
-            </ul>
-          </li>
-          <li>작성 방법 및 제출 기한 안내
-            <ul>
-              <li>OJT 종료 후 1주일 이내 회신</li>
-              <li>2026.02.13.(금)까지 최종 인사운영부 제출 마감</li>
-            </ul>
-          </li>
-          <li>AI 과제 발표 참석 요청 및 회신 마감일 (12.19) 안내</li>
-          <li>맺음말 및 문의처 표기</li>
-        </ul>
-
-        <h3>6-2. 신입사원 OJT 실시 계획 문서(요약 구조)</h3>
-        <ul>
-          <li>문서 제목 : 「51기 방송기술직 신입사원 OJT 실시 계획(안)」</li>
-          <li>목차 예시
-            <ol>
-              <li>개요
-                <ul>
-                  <li>일정, 대상, 장소, 인솔자</li>
-                </ul>
-              </li>
-              <li>세부 일정 (주간 개요 + 국별 세부표)</li>
-              <li>주요 내용 (방송인프라본부 소개, 현장 실무교육, 송신시설 견학 등)</li>
-              <li>AI 과제 및 발표 계획</li>
-              <li>기타 유의사항 (출결, 복장, 보안, 안전 등)</li>
-            </ol>
-          </li>
-        </ul>
-      </section>
-
-      <!-- 7. 검색·운영 팁 -->
-      <section class="card" id="sec-7" data-searchable>
-        <div class="section-title">
-          <h2>7. 검색·운영 팁</h2>
-          <span class="section-badge">검색 기능 안내</span>
-        </div>
-
-        <h3>7-1. 이 페이지에서 검색하는 법</h3>
-        <ul>
-          <li>좌측 상단 <strong>“매뉴얼 내 검색”</strong> 입력창에 키워드를 입력합니다.</li>
-          <li>예시 키워드
-            <ul>
-              <li><code>관악산</code> → 관악산 송신소 견학 관련 일정만 표시</li>
-              <li><code>수습평가표</code> → 수습 평가 제출, 평가표 관련 섹션 표시</li>
-              <li><code>생방기술국</code> → 생방기술국 OJT 일정 관련 내용만 표시</li>
-              <li><code>예산</code> → OJT 예산 산출 및 예산 코드 관련 내용만 표시</li>
-            </ul>
-          </li>
-          <li>검색창을 비우면 다시 전체 섹션이 표시됩니다.</li>
-        </ul>
-
-        <h3>7-2. GitHub Pages에서 운영 팁</h3>
-        <ul>
-          <li>이 HTML 파일을 저장 후 <code>index.html</code>로 리포지토리에 업로드하면 바로 사용 가능</li>
-          <li>기수 변경 시
-            <ul>
-              <li>문서 상단의 연도·기수·기간·인원·예산 값만 수정</li>
-              <li>각 국(부) 일정표는 새 OJT용으로 교체 및 재업로드</li>
-            </ul>
-          </li>
-          <li>PDF로 뽑아 배포하고 싶다면 브라우저에서 인쇄 → PDF 저장 활용</li>
-        </ul>
-      </section>
-    </main>
-  </div>
-
-  <script>
-    (function () {
-      const searchInput = document.getElementById('searchInput');
-      const searchMeta = document.getElementById('searchMeta');
-      const sections = Array.from(document.querySelectorAll('[data-searchable]'));
-      const tocToggle = document.querySelector('.toc-toggle');
-      const sidebar = document.querySelector('.sidebar');
-
-      function normalize(text) {
-        return text
-          .toLowerCase()
-          .replace(/\s+/g, ' ')
-          .trim();
-      }
-
-      function clearHighlights() {
-        document
-          .querySelectorAll('.highlight')
-          .forEach((el) => el.classList.remove('highlight'));
-      }
-
-      function handleSearch() {
-        const query = normalize(searchInput.value || '');
-        clearHighlights();
-
-        if (!query) {
-          sections.forEach((sec) => {
-            sec.classList.remove('search-hidden', 'search-hit');
-          });
-          searchMeta.textContent = '전체 섹션이 표시됩니다.';
-          return;
-        }
-
-        let matchCount = 0;
-        sections.forEach((sec) => {
-          const text = normalize(sec.textContent || '');
-          if (text.includes(query)) {
-            sec.classList.remove('search-hidden');
-            sec.classList.add('search-hit');
-            matchCount += 1;
-          } else {
-            sec.classList.add('search-hidden');
-            sec.classList.remove('search-hit');
-          }
-        });
-
-        if (matchCount === 0) {
-          searchMeta.textContent = '검색 결과가 없습니다.';
-        } else {
-          searchMeta.textContent = `검색어 "${searchInput.value}"와(과) 일치하는 섹션: ${matchCount}개`;
-        }
-      }
-
-      if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
-      }
-
-      if (tocToggle && sidebar) {
-        tocToggle.addEventListener('click', function () {
-          sidebar.classList.toggle('open');
-        });
-      }
-    })();
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
