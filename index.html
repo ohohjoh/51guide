@@ -28,7 +28,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     a {
@@ -42,7 +42,7 @@
     header {
       background: linear-gradient(135deg, #2447a3, #2f7bda);
       color: #fff;
-      padding: 32px 20px 24px;
+      padding: 28px 20px 20px;
       box-shadow: var(--shadow-soft);
       position: sticky;
       top: 0;
@@ -94,15 +94,6 @@
       padding: 0 20px;
     }
 
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      header {
-        position: static;
-      }
-    }
-
     /* Sidebar */
     .sidebar {
       position: sticky;
@@ -115,6 +106,7 @@
       padding: 16px;
       max-height: calc(100vh - 130px);
       overflow: auto;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
 
     .sidebar h2 {
@@ -135,6 +127,8 @@
 
     .toc a {
       color: var(--muted);
+      display: block;
+      padding: 4px 0;
     }
 
     .toc a:hover {
@@ -178,6 +172,30 @@
       font-size: 11px;
       color: var(--muted);
       margin-top: 6px;
+    }
+
+    /* 모바일용 목차 토글 버튼 */
+    .toc-toggle {
+      display: none;
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #1d2a5b;
+      font-size: 13px;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .toc-toggle span {
+      float: right;
+      font-size: 12px;
+    }
+
+    .sidebar-body {
+      /* 데스크톱에선 항상 보임, 모바일에서 토글 */
     }
 
     /* Content */
@@ -372,6 +390,100 @@
       padding: 2px 4px;
       border-radius: 4px;
     }
+
+    /* =========================
+       모바일 최적화
+       ========================= */
+    @media (max-width: 900px) {
+      header {
+        position: static;
+        padding: 20px 16px 16px;
+      }
+      header .inner {
+        padding: 0;
+      }
+      header h1 {
+        font-size: 20px;
+      }
+      header p {
+        font-size: 13px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 0 12px 20px;
+      }
+
+      .sidebar {
+        position: static;
+        max-height: none;
+        padding: 12px 12px 10px;
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+        transform: none;
+      }
+
+      .toc-toggle {
+        display: block;
+      }
+
+      .sidebar-body {
+        margin-top: 4px;
+        border-top: 1px dashed var(--border);
+        padding-top: 8px;
+      }
+
+      /* 모바일에서 기본은 닫혀 있고, open 클래스일 때 열기 */
+      .sidebar:not(.open) .sidebar-body {
+        display: none;
+      }
+
+      .sidebar.open .toc-toggle {
+        background: #e0ecff;
+      }
+
+      .card {
+        padding: 16px 14px;
+        border-radius: 12px;
+      }
+
+      h3 {
+        font-size: 15px;
+      }
+
+      h4 {
+        font-size: 13px;
+      }
+
+      p, ul, ol {
+        font-size: 13px;
+      }
+
+      /* 테이블 가로 스크롤 */
+      table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+      }
+
+      th, td {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 18px;
+      }
+      .section-title h2 {
+        font-size: 17px;
+      }
+      .section-badge {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -391,47 +503,54 @@
   <div class="layout">
     <!-- Sidebar / TOC -->
     <aside class="sidebar">
-      <h2>목차</h2>
-      <ul class="toc">
-        <li><a href="#sec-1">1. 관련 근거 및 기본 정보</a></li>
-        <li>
-          <a href="#sec-2">2. OJT 운영 개요</a>
-          <ul class="toc toc-sub">
-            <li><a href="#sec-2-1">2-1. 목적·기간·대상·장소</a></li>
-            <li><a href="#sec-2-2">2-2. 예산 및 집행</a></li>
-            <li><a href="#sec-2-3">2-3. 주요 프로그램 구성</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#sec-3">3. OJT 일정 구조</a>
-          <ul class="toc toc-sub">
-            <li><a href="#sec-3-1">3-1. 주간 일정 개요(캘린더)</a></li>
-            <li><a href="#sec-3-2">3-2. 국·부별 세부 일정</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#sec-4">4. 수습직원 평가 계획</a>
-          <ul class="toc toc-sub">
-            <li><a href="#sec-4-1">4-1. 평가 목적 및 기간</a></li>
-            <li><a href="#sec-4-2">4-2. 평가 체계 및 시기</a></li>
-            <li><a href="#sec-4-3">4-3. 평가 요소·등급·점수 산출</a></li>
-            <li><a href="#sec-4-4">4-4. 평가 결과 적용 기준</a></li>
-          </ul>
-        </li>
-        <li><a href="#sec-5">5. 담당자별 업무 체크리스트</a></li>
-        <li><a href="#sec-6">6. 이메일·문서 템플릿 요약</a></li>
-        <li><a href="#sec-7">7. 검색·운영 팁</a></li>
-      </ul>
+      <button class="toc-toggle" type="button">
+        📑 목차 / 검색 열기
+        <span>▼</span>
+      </button>
 
-      <div class="search-box">
-        <label for="searchInput">🔍 매뉴얼 내 검색 (키워드)</label>
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="예: 수습평가표, 관악산송신소, 생방기술국, 평가기간..."
-        />
-        <div class="search-meta" id="searchMeta">
-          전체 섹션이 표시됩니다.
+      <div class="sidebar-body">
+        <h2>목차</h2>
+        <ul class="toc">
+          <li><a href="#sec-1">1. 관련 근거 및 기본 정보</a></li>
+          <li>
+            <a href="#sec-2">2. OJT 운영 개요</a>
+            <ul class="toc toc-sub">
+              <li><a href="#sec-2-1">2-1. 목적·기간·대상·장소</a></li>
+              <li><a href="#sec-2-2">2-2. 예산 및 집행</a></li>
+              <li><a href="#sec-2-3">2-3. 주요 프로그램 구성</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#sec-3">3. OJT 일정 구조</a>
+            <ul class="toc toc-sub">
+              <li><a href="#sec-3-1">3-1. 주간 일정 개요(캘린더)</a></li>
+              <li><a href="#sec-3-2">3-2. 국·부별 세부 일정</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#sec-4">4. 수습직원 평가 계획</a>
+            <ul class="toc toc-sub">
+              <li><a href="#sec-4-1">4-1. 평가 목적 및 기간</a></li>
+              <li><a href="#sec-4-2">4-2. 평가 체계 및 시기</a></li>
+              <li><a href="#sec-4-3">4-3. 평가 요소·등급·점수 산출</a></li>
+              <li><a href="#sec-4-4">4-4. 평가 결과 적용 기준</a></li>
+            </ul>
+          </li>
+          <li><a href="#sec-5">5. 담당자별 업무 체크리스트</a></li>
+          <li><a href="#sec-6">6. 이메일·문서 템플릿 요약</a></li>
+          <li><a href="#sec-7">7. 검색·운영 팁</a></li>
+        </ul>
+
+        <div class="search-box">
+          <label for="searchInput">🔍 매뉴얼 내 검색 (키워드)</label>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="예: 수습평가표, 관악산송신소, 생방기술국, 평가기간..."
+          />
+          <div class="search-meta" id="searchMeta">
+            전체 섹션이 표시됩니다.
+          </div>
         </div>
       </div>
     </aside>
@@ -1054,12 +1173,12 @@
               <tr>
                 <td>집체교육 평가</td>
                 <td>20점</td>
-                <td>평가항목별 점수 합산 → 100점 만점 환산 → 점수 × 0.2</td>
+                <td>평가항목별 점수를 합산 → 100점 만점 환산 → 점수 × 0.2</td>
               </tr>
               <tr>
                 <td>부서평가 (OJT·배치)</td>
                 <td>80점</td>
-                <td>평가항목별 점수 합산 → 100점 만점 환산 → 점수 × 0.8<br />※ 방송기술 등 OJT 부서장 평가를 받는 분야는 별도 비율 적용 가능</td>
+                <td>평가항목별 점수를 합산 → 100점 만점 환산 → 점수 × 0.8<br />※ 방송기술 등 OJT 부서장 평가를 받는 분야는 별도 비율 적용 가능</td>
               </tr>
               <tr>
                 <td><strong>합계 (종합평점)</strong></td>
@@ -1235,6 +1354,8 @@
       const searchInput = document.getElementById('searchInput');
       const searchMeta = document.getElementById('searchMeta');
       const sections = Array.from(document.querySelectorAll('[data-searchable]'));
+      const tocToggle = document.querySelector('.toc-toggle');
+      const sidebar = document.querySelector('.sidebar');
 
       function normalize(text) {
         return text
@@ -1281,7 +1402,15 @@
         }
       }
 
-      searchInput.addEventListener('input', handleSearch);
+      if (searchInput) {
+        searchInput.addEventListener('input', handleSearch);
+      }
+
+      if (tocToggle && sidebar) {
+        tocToggle.addEventListener('click', function () {
+          sidebar.classList.toggle('open');
+        });
+      }
     })();
   </script>
 </body>
