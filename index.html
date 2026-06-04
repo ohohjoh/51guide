@@ -77,6 +77,20 @@
   ul.tk li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:2px;background:var(--orange);transform:rotate(45deg);}
   .card.hi ul.tk li{color:rgba(255,255,255,.88);}
   .card.hi ul.tk li::before{background:var(--orange);}
+  .cardnum{display:flex;align-items:baseline;gap:9px;margin-bottom:11px;}
+  .cardnum .cnum{font-family:"JetBrains Mono",monospace;font-size:30px;font-weight:800;color:var(--orange);line-height:1;}
+  .cardnum .clab{font-size:17px;font-weight:800;color:var(--purple);}
+  .card.hi .cardnum .clab{color:#fff;}
+  .g6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;}
+  .g5 .card{padding:16px;}
+  .posbanner{background:var(--purple);color:#fff;text-align:center;font-weight:700;font-size:13.5px;padding:11px;border-radius:10px;}
+  .ptag{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--blue-soft);color:var(--blue-deep);margin-bottom:10px;}
+  .ptag.rt{background:var(--orange-soft);color:#9a5b00;}
+  .card.hi .ptag{background:rgba(255,255,255,.16);color:#fff;}
+  .spectrum{display:flex;align-items:center;margin-top:4px;}
+  .spectrum .bar{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--orange));margin:0 14px;}
+  .spectrum .end{font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:700;color:var(--blue-deep);white-space:nowrap;}
 
   /* timeline */
   .timeline{position:relative;}
@@ -237,7 +251,7 @@
       <div class="cv-main">
         <div class="gw"></div>
         <div class="cv-eyebrow">KBS Technical Briefing</div>
-        <h1 class="cv-title" data-ko="방송 인프라의||미래상" data-en="The Future of||Broadcast Infrastructure" data-ja="放送インフラの||未来像"></h1>
+        <h1 class="cv-title" data-ko="방송 인프라의 미래상 및||AM 방송의 현황" data-en="The Future of Broadcast Infrastructure||& the State of AM Radio" data-ja="放送インフラの未来像と||AM放送の現状"></h1>
         <div class="cv-rule"></div>
         <div class="cv-tags"><span>Production</span><span>Transmission</span><span>Distribution</span></div>
       </div>
@@ -256,29 +270,31 @@
           <div class="col p0">
             <div class="hd"><span class="lt">OVERVIEW</span><span class="st" data-ko="개요" data-en="Overview" data-ja="概要"></span></div>
             <div class="row" data-go="2"><span class="n">01</span><span class="rt" data-ko="핵심 메시지" data-en="Key Message" data-ja="キーメッセージ"></span></div>
+            <div class="row" data-go="3"><span class="n">02</span><span class="rt" data-ko="KBS 채널·플랫폼 현황" data-en="KBS Channels & Platforms" data-ja="KBSのチャンネル・PF"></span></div>
           </div>
-          <div class="col ">
+          <div class="col">
             <div class="hd"><span class="lt">PART I</span><span class="st" data-ko="방송 인프라의 미래상·제작" data-en="Future Vision · Production" data-ja="放送インフラの未来像・制作"></span></div>
-            <div class="row" data-go="3"><span class="n">02</span><span class="rt" data-ko="미디어 환경 변화" data-en="Media Environment" data-ja="メディア環境の変化"></span></div>
-            <div class="row" data-go="4"><span class="n">03</span><span class="rt" data-ko="시청 행태 변화" data-en="Viewing Behavior" data-ja="視聴行動の変化"></span></div>
-            <div class="row" data-go="5"><span class="n">04</span><span class="rt" data-ko="제작 인프라 전환" data-en="Production Infrastructure" data-ja="制作インフラの転換"></span></div>
-            <div class="row" data-go="6"><span class="n">05</span><span class="rt" data-ko="고품질·실감 제작" data-en="High-Quality & Immersive" data-ja="高品質・没入型制作"></span></div>
-            <div class="row" data-go="7"><span class="n">06</span><span class="rt" data-ko="AI 활용 확대" data-en="Expansion of AI" data-ja="AI活用の拡大"></span></div>
+            <div class="row" data-go="4"><span class="n">03</span><span class="rt" data-ko="미디어 환경 변화" data-en="Media Environment" data-ja="メディア環境の変化"></span></div>
+            <div class="row" data-go="5"><span class="n">04</span><span class="rt" data-ko="시청 행태 변화" data-en="Viewing Behavior" data-ja="視聴行動の変化"></span></div>
+            <div class="row" data-go="6"><span class="n">05</span><span class="rt" data-ko="제작 인프라 전환" data-en="Production Infrastructure" data-ja="制作インフラの転換"></span></div>
+            <div class="row" data-go="7"><span class="n">06</span><span class="rt" data-ko="고품질·실감 제작" data-en="High-Quality & Immersive" data-ja="高品質・没入型制作"></span></div>
+            <div class="row" data-go="8"><span class="n">07</span><span class="rt" data-ko="AI 활용 확대" data-en="Expansion of AI" data-ja="AI活用の拡大"></span></div>
           </div>
           <div class="col p2">
             <div class="hd"><span class="lt">PART II</span><span class="st" data-ko="송신·송출 현황" data-en="Transmission & Distribution" data-ja="送信・送出の現状"></span></div>
-            <div class="row" data-go="8"><span class="n">07</span><span class="rt" data-ko="지상파 역할·송신 현황 (AM)" data-en="Terrestrial & Transmission (AM)" data-ja="地上波・送信の現状（AM）"></span></div>
-            <div class="row" data-go="9"><span class="n">08</span><span class="rt" data-ko="멀티플랫폼 분배" data-en="Multi-Platform Distribution" data-ja="マルチプラットフォーム配信"></span></div>
-            <div class="row" data-go="10"><span class="n">09</span><span class="rt" data-ko="CTV·FAST · 방송통신 융합" data-en="CTV·FAST & Convergence" data-ja="CTV・FASTと放送通信融合"></span></div>
+            <div class="row" data-go="9"><span class="n">08</span><span class="rt" data-ko="플랫폼 서비스 포지셔닝" data-en="Platform Positioning" data-ja="PFポジショニング"></span></div>
+            <div class="row" data-go="10"><span class="n">09</span><span class="rt" data-ko="지상파 역할·송신 현황 (AM)" data-en="Terrestrial & Transmission (AM)" data-ja="地上波・送信の現状（AM）"></span></div>
+            <div class="row" data-go="11"><span class="n">10</span><span class="rt" data-ko="멀티플랫폼 분배" data-en="Multi-Platform Distribution" data-ja="マルチプラットフォーム配信"></span></div>
+            <div class="row" data-go="12"><span class="n">11</span><span class="rt" data-ko="CTV·FAST · 방송통신 융합" data-en="CTV·FAST & Convergence" data-ja="CTV・FASTと放送通信融合"></span></div>
           </div>
-          <div class="col ">
+          <div class="col">
             <div class="hd"><span class="lt">OUTLOOK</span><span class="st" data-ko="전망" data-en="Outlook" data-ja="展望"></span></div>
-            <div class="row" data-go="11"><span class="n">10</span><span class="rt" data-ko="미래 방향" data-en="Future Direction" data-ja="今後の方向性"></span></div>
-            <div class="row" data-go="12"><span class="n">11</span><span class="rt" data-ko="결론" data-en="Conclusion" data-ja="まとめ"></span></div>
+            <div class="row" data-go="13"><span class="n">12</span><span class="rt" data-ko="미래 방향" data-en="Future Direction" data-ja="今後の方向性"></span></div>
+            <div class="row" data-go="14"><span class="n">13</span><span class="rt" data-ko="결론" data-en="Conclusion" data-ja="まとめ"></span></div>
           </div>
           <div class="col app">
             <div class="hd"><span class="lt">APPENDIX</span><span class="st" data-ko="참고자료" data-en="Reference" data-ja="参考資料"></span></div>
-            <div class="row ref" data-go="13"><span class="n">※</span><span class="rt" data-ko="NHK 의제 점검표" data-en="NHK Agenda Checklist" data-ja="NHK議題チェック表"></span></div>
+            <div class="row ref" data-go="15"><span class="n">※</span><span class="rt" data-ko="NHK 의제 점검표" data-en="NHK Agenda Checklist" data-ja="NHK議題チェック表"></span></div>
           </div>
         </div>
       </div>
@@ -289,7 +305,7 @@
       <div class="topbar">
         <div class="tb-left"><div class="tb-idx" data-go="1">01</div>
           <div class="tb-part"><span class="pp">Overview</span><span class="ps" data-ko="핵심 메시지" data-en="Key Message" data-ja="キーメッセージ"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">01 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">01 / 13</span></div>
       </div>
       <div class="main">
         <h2 class="ttl" data-ko="단순 대체가 아니라 *역할 재정의*" data-en="Not replacement, but *role redefinition*" data-ja="単純な置き換えではなく*役割の再定義*"></h2>
@@ -305,16 +321,46 @@
           <div class="pull"><div class="gw"></div>
             <p data-ko="지상파의 *공영적 기능*은 유지하면서,||IP·클라우드·AI를 결합하는 *하이브리드 구조*로 발전시킬 필요가 있습니다." data-en="Keep terrestrial's *public-service functions*,||and grow them into a *hybrid structure* that combines IP, cloud and AI." data-ja="地上波の*公共的機能*を維持しつつ、||IP・クラウド・AIを組み合わせる*ハイブリッド構造*へ発展させる必要がある。"></p></div>
         </div>
-        <div class="note"><div class="nl" data-ko="이 메시지는 발표 전반의 기준점이며, 미래 방향(10)과 결론(11)에서 다시 제시됩니다." data-en="This message frames the whole talk and recurs in Future Direction (10) and Conclusion (11)." data-ja="このメッセージは発表全体の基準であり、今後の方向性(10)とまとめ(11)で再び示されます。"></div></div>
+        <div class="note"><div class="nl" data-ko="이 메시지는 발표 전반의 기준점이며, 미래 방향(12)과 결론(13)에서 다시 제시됩니다." data-en="This message frames the whole talk and recurs in Future Direction (12) and Conclusion (13)." data-ja="このメッセージは発表全体の基準であり、今後の方向性(12)とまとめ(13)で再び示されます。"></div></div>
+      </div>
+    </section>
+
+    <!-- ===== CHANNEL PORTFOLIO ===== -->
+    <section class="slide">
+      <div class="topbar">
+        <div class="tb-left"><div class="tb-idx" data-go="1">02</div>
+          <div class="tb-part"><span class="pp">Overview</span><span class="ps" data-ko="KBS 채널·플랫폼 현황" data-en="KBS Channels & Platforms" data-ja="KBSのチャンネル・PF"></span></div></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">02 / 13</span></div>
+      </div>
+      <div class="main">
+        <h2 class="ttl" data-ko="KBS가 운영하는 *채널과 플랫폼*" data-en="The *channels and platforms* KBS operates" data-ja="KBSが運用する*チャンネルとPF*"></h2>
+        <p class="lead" data-ko="KBS는 TV·라디오·DMB·케이블·국제·디지털에 걸쳐 다양한 채널을 운영하는 다중 플랫폼 공영 미디어입니다." data-en="KBS is a multi-platform public broadcaster spanning TV, radio, DMB, cable, international and digital channels." data-ja="KBSはTV・ラジオ・DMB・ケーブル・国際・デジタルにわたる多様なチャンネルを運用するマルチPF公共メディアです。"></p>
+        <div class="content">
+          <div class="g6">
+            <div class="card accent"><div class="cardnum"><span class="cnum">2</span><span class="clab" data-ko="TV" data-en="TV" data-ja="TV"></span></div>
+              <ul class="tk"><li data-ko="KBS 1TV · 2TV" data-en="KBS 1TV · 2TV" data-ja="KBS 1TV・2TV"></li><li data-ko="보도·교양·예능" data-en="News · culture · entertainment" data-ja="報道・教養・娯楽"></li></ul></div>
+            <div class="card accent"><div class="cardnum"><span class="cnum">6</span><span class="clab" data-ko="라디오" data-en="Radio" data-ja="ラジオ"></span></div>
+              <ul class="tk"><li data-ko="1·2·3라디오, 1·2FM" data-en="1/2/3 Radio, 1/2 FM" data-ja="1・2・3ラジオ、1・2FM"></li><li data-ko="한민족방송" data-en="Hanminjok (overseas)" data-ja="ハンミンジョク放送"></li></ul></div>
+            <div class="card accent"><div class="cardnum"><span class="cnum">4</span><span class="clab" data-ko="지상파 DMB" data-en="Terrestrial DMB" data-ja="地上波DMB"></span></div>
+              <ul class="tk"><li data-ko="U-KBS 모바일 채널" data-en="U-KBS mobile channels" data-ja="U-KBSモバイルch"></li></ul></div>
+            <div class="card accent"><div class="cardnum"><span class="cnum">6</span><span class="clab" data-ko="케이블·KBSN" data-en="Cable · KBSN" data-ja="ケーブル・KBSN"></span></div>
+              <ul class="tk"><li data-ko="Drama·Joy·Sports" data-en="Drama·Joy·Sports" data-ja="Drama・Joy・Sports"></li><li data-ko="W·Kids·Life" data-en="W·Kids·Life" data-ja="W・Kids・Life"></li></ul></div>
+            <div class="card accent"><div class="cardnum"><span class="cnum">3</span><span class="clab" data-ko="국제 채널" data-en="International" data-ja="国際チャンネル"></span></div>
+              <ul class="tk"><li data-ko="KBS World TV·Radio·24" data-en="KBS World TV·Radio·24" data-ja="KBS World TV・Radio・24"></li></ul></div>
+            <div class="card hi"><div class="cardnum"><span class="cnum">+</span><span class="clab" data-ko="디지털 플랫폼" data-en="Digital Platforms" data-ja="デジタルPF"></span></div>
+              <ul class="tk"><li data-ko="myK · Kong · 홈페이지" data-en="myK · Kong · Homepage" data-ja="myK・Kong・ホームページ"></li></ul></div>
+          </div>
+        </div>
+        <div class="note"><div class="nl" data-ko="공영방송으로서 무료 보편 서비스를 유지하면서, 동시에 디지털 플랫폼으로 시청 접점을 넓혀 가고 있습니다." data-en="As a public broadcaster, KBS keeps free universal service while widening its touchpoints through digital platforms." data-ja="公共放送として無料の普遍的サービスを維持しつつ、デジタルPFへ視聴接点を広げています。"></div></div>
       </div>
     </section>
 
     <!-- ===== 02 MEDIA ENVIRONMENT ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">02</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">03</div>
           <div class="tb-part"><span class="pp">Part I · Future Vision</span><span class="ps" data-ko="미디어 환경 변화" data-en="Media Environment" data-ja="メディア環境の変化"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">02 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">03 / 13</span></div>
       </div>
       <div class="main">
         <div class="qchip" data-ko="관련 의제 · NHK Q1 (미디어 환경 변화)" data-en="Related agenda · NHK Q1 (media environment)" data-ja="関連議題 · NHK Q1（メディア環境の変化）"></div>
@@ -343,9 +389,9 @@
     <!-- ===== 03 VIEWING BEHAVIOR ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">03</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">04</div>
           <div class="tb-part"><span class="pp">Part I · Future Vision</span><span class="ps" data-ko="시청 행태 변화" data-en="Viewing Behavior" data-ja="視聴行動の変化"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">03 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">04 / 13</span></div>
       </div>
       <div class="main">
         <div class="qchip" data-ko="관련 의제 · NHK Q4 (시청 디바이스 변화 대응)" data-en="Related agenda · NHK Q4 (device change)" data-ja="関連議題 · NHK Q4（視聴デバイスの変化）"></div>
@@ -375,9 +421,9 @@
     <!-- ===== 04 PRODUCTION INFRA ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">04</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">05</div>
           <div class="tb-part"><span class="pp">Part I · Production</span><span class="ps" data-ko="제작 인프라 전환" data-en="Production Infrastructure" data-ja="制作インフラの転換"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">04 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">05 / 13</span></div>
       </div>
       <div class="main">
         <h2 class="ttl" data-ko="Tape에서 IP, 그리고 *Cloud*로" data-en="From Tape to IP, then *Cloud*" data-ja="TapeからIP、そして*Cloud*へ"></h2>
@@ -404,9 +450,9 @@
     <!-- ===== 05 HIGH QUALITY ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">05</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">06</div>
           <div class="tb-part"><span class="pp">Part I · Production</span><span class="ps" data-ko="고품질·실감 제작" data-en="High-Quality & Immersive" data-ja="高品質・没入型制作"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">05 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">06 / 13</span></div>
       </div>
       <div class="main">
         <div class="qchip" data-ko="관련 의제 · NHK Q5 (4K/8K 기술 방향)" data-en="Related agenda · NHK Q5 (4K/8K direction)" data-ja="関連議題 · NHK Q5（4K/8Kの方向性）"></div>
@@ -424,7 +470,7 @@
               <div class="kk">Audio</div><h4 data-ko="몰입형 오디오" data-en="Immersive Audio" data-ja="没入型オーディオ"></h4>
               <ul class="tk"><li data-ko="3D 입체음향" data-en="3D audio" data-ja="3D立体音響"></li><li>MPEG-H</li><li>Dolby Atmos</li></ul></div>
           </div>
-          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="KBS는 2011년 3D, 2012~19년 5.1채널(유희열의 스케치북), 2017년 HDR(HLG)을 거쳐 2023년 TS-6 XR 스튜디오(10m×4.5m LED월)를 완공했습니다." data-en="From 3D (2011) and 5.1 audio (2012–19) to HDR/HLG (2017), KBS completed its TS-6 XR studio (10m×4.5m LED wall) in 2023." data-ja="KBSは2011年の3D、2012〜19年の5.1ch、2017年のHDR（HLG）を経て、2023年にTS-6 XRスタジオ（10m×4.5m LEDウォール）を完成させた。"></p></div>
+          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="KBS는 2012~19년 5.1채널(유희열의 스케치북), 2017년 HDR(HLG)을 거쳐 2023년 TS-6 XR 스튜디오(10m×4.5m LED월)를 완공했습니다." data-en="From 5.1 audio (2012–19) to HDR/HLG (2017), KBS completed its TS-6 XR studio (10m×4.5m LED wall) in 2023." data-ja="KBSは2012〜19年の5.1ch、2017年のHDR（HLG）を経て、2023年にTS-6 XRスタジオ（10m×4.5m LEDウォール）を完成させた。"></p></div>
         </div>
         <div class="note">
           <div class="nl" data-ko="실감 제작은 콘텐츠 차별화 수단이자 고품질 서비스의 가치를 높이는 핵심 요소로 보고 있습니다." data-en="Immersive production differentiates content and raises the value of high-quality services." data-ja="没入型制作はコンテンツ差別化の手段であり、高品質サービスの価値を高める要素と捉えています。"></div>
@@ -436,37 +482,62 @@
     <!-- ===== 06 AI ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">06</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">07</div>
           <div class="tb-part"><span class="pp">Part I · Production</span><span class="ps" data-ko="AI 활용 확대" data-en="Expansion of AI" data-ja="AI活用の拡大"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">06 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">07 / 13</span></div>
       </div>
       <div class="main">
         <h2 class="ttl" data-ko="제작 보조를 넘어 *운영 자동화*로" data-en="Beyond assistance to *operational automation*" data-ja="制作補助を超えて*運用自動化*へ"></h2>
-        <p class="lead" data-ko="AI는 제작 보조 도구를 넘어 아카이브·품질관리·운영까지 확장되는 인프라 기술로 보고 있습니다." data-en="We see AI as an infrastructure technology extending beyond production aids to archives, QC and operations." data-ja="AIは制作補助を超え、アーカイブ・品質管理・運用まで広がるインフラ技術と捉えている。"></p>
+        <p class="lead" data-ko="AI는 제작 보조를 넘어 아카이브·품질관리·운영까지 확장될 수 있는 인프라 기술이며, 운영 영역은 아직 초기 단계로 단계적으로 적용·검토하고 있습니다." data-en="We see AI as an infrastructure technology that could extend beyond production aids to archives, QC and operations; in operations it is still early — applied and explored step by step." data-ja="AIは制作補助を超え、アーカイブ・品質管理・運用へ広がりうるインフラ技術であり、運用領域はまだ初期段階で段階的に適用・検討している。"></p>
         <div class="content">
           <div class="g3">
             <div class="card"><div class="kk">Creative</div><h4 data-ko="창작 지원" data-en="Creative" data-ja="創作支援"></h4>
               <ul class="tk"><li data-ko="생성형 AI 영상" data-en="Generative video" data-ja="生成AI映像"></li><li data-ko="AI 아나운서" data-en="AI announcer" data-ja="AIアナウンサー"></li><li data-ko="AI 원고 작성" data-en="AI scripting" data-ja="AI原稿作成"></li></ul></div>
             <div class="card"><div class="kk">Automation</div><h4 data-ko="자동화" data-en="Automation" data-ja="自動化"></h4>
               <ul class="tk"><li data-ko="자막 생성·동기화" data-en="Subtitle gen / sync" data-ja="字幕生成・同期"></li><li data-ko="다국어 번역" data-en="Multilingual translation" data-ja="多言語翻訳"></li><li data-ko="카메라 트래킹" data-en="Camera tracking" data-ja="カメラトラッキング"></li></ul></div>
-            <div class="card hi"><div class="kk">Operation</div><h4 data-ko="운영·인프라" data-en="Operation" data-ja="運用・インフラ"></h4>
-              <ul class="tk"><li data-ko="아카이브 멀티모달 검색" data-en="Multimodal archive search" data-ja="アーカイブのマルチモーダル検索"></li><li data-ko="AI 업스케일·리마스터링" data-en="Upscale / remaster" data-ja="AIアップスケール"></li><li data-ko="AI 기반 QC·모니터링" data-en="AI-based QC / monitoring" data-ja="AIによるQC・監視"></li></ul></div>
+            <div class="card hi"><div class="kk">Operation · early</div><h4 data-ko="운영·인프라 (초기)" data-en="Operation (early)" data-ja="運用・インフラ（初期）"></h4>
+              <ul class="tk"><li data-ko="아카이브 멀티모달 검색" data-en="Multimodal archive search" data-ja="アーカイブのマルチモーダル検索"></li><li data-ko="AI 업스케일·리마스터링" data-en="Upscale / remaster" data-ja="AIアップスケール"></li><li data-ko="AI QC·모니터링 (검토)" data-en="AI QC / monitoring (under review)" data-ja="AI QC・監視（検討中）"></li></ul></div>
           </div>
-          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="KBS는 생성형 AI 인서트 영상, AI 아나운서·번역, 아카이브 멀티모달 검색, AI UHD 리마스터링 등에 AI를 단계적으로 적용하고 있습니다." data-en="KBS is gradually applying AI — generative insert footage, AI anchors/translation, multimodal archive search and UHD remastering." data-ja="KBSは生成AIのインサート映像、AIアナウンサー・翻訳、アーカイブのマルチモーダル検索、UHDリマスターなどにAIを段階的に適用している。"></p></div>
+          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="KBS는 생성형 AI 인서트 영상, AI 아나운서·번역 등에 AI를 적용하기 시작했으며, 송출·품질관리 등 운영·인프라 영역은 초기 단계로 적용할 기술로 보고 단계적으로 도입을 검토하고 있습니다." data-en="KBS has begun applying AI to generative insert footage and AI anchors/translation; for operations and infrastructure (delivery, QC) it is at an early stage — a technology to adopt, reviewed step by step." data-ja="KBSは生成AIのインサート映像やAIアナウンサー・翻訳などへの適用を始めており、送出・品質管理など運用・インフラ領域は初期段階で、導入すべき技術として段階的に検討している。"></p></div>
         </div>
         <div class="note">
-          <div class="nl" data-ko="AI는 송출·아카이브·품질관리 영역에서 운영 효율을 높이는 인프라 기술로 점차 자리잡을 가능성이 높습니다." data-en="AI is likely to settle as an infrastructure technology raising efficiency in delivery, archive and QC." data-ja="AIは送出・アーカイブ・QCの分野で効率を高めるインフラ技術として定着する可能性が高いです。"></div>
+          <div class="nl" data-ko="운영·인프라 영역의 AI는 아직 초기 단계로, 적용할 기술로 보고 단계적으로 검토·도입을 추진하고 있습니다." data-en="In operations and infrastructure, AI is still early — a technology we intend to adopt and are reviewing and introducing step by step." data-ja="運用・インフラ領域のAIはまだ初期段階で、導入すべき技術として段階的に検討・導入を進めています。"></div>
           <div class="nl" data-ko="※ <b>QC</b> = 영상·음성 품질을 점검하는 품질관리(Quality Control)" data-en="※ <b>QC</b> = Quality Control, checking video/audio quality." data-ja="※ <b>QC</b> = 映像・音声の品質を点検する品質管理。"></div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== PLATFORM POSITIONING ===== -->
+    <section class="slide">
+      <div class="topbar">
+        <div class="tb-left"><div class="tb-idx" data-go="1">08</div>
+          <div class="tb-part"><span class="pp">Part II · Distribution</span><span class="ps" data-ko="플랫폼 서비스 포지셔닝" data-en="Platform Positioning" data-ja="プラットフォーム・ポジショニング"></span></div></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">08 / 13</span></div>
+      </div>
+      <div class="main">
+        <h2 class="ttl" data-ko="KBS 콘텐츠는 *모든 플랫폼*에 도달합니다" data-en="KBS content reaches *every platform*" data-ja="KBSコンテンツは*あらゆるPF*へ届く"></h2>
+        <p class="lead" data-ko="KBS 콘텐츠(TV·라디오·KBSN·국제채널)는 지상파·유료방송부터 OTT·자체 플랫폼·YouTube까지, 레거시와 디지털을 아우르며 분배됩니다." data-en="KBS content (TV, radio, KBSN, international) is distributed from terrestrial and pay TV to OTT, own platforms and YouTube — across legacy and digital." data-ja="KBSコンテンツ（TV・ラジオ・KBSN・国際）は、地上波・有料放送からOTT・自社PF・YouTubeまで、レガシーとデジタルにわたり配信されます。"></p>
+        <div class="content">
+          <div class="posbanner" data-ko="KBS 콘텐츠 · TV / 라디오 / KBSN / KBS24 / 국제채널" data-en="KBS Contents · TV / Radio / KBSN / KBS24 / International" data-ja="KBSコンテンツ · TV / ラジオ / KBSN / KBS24 / 国際"></div>
+          <div class="g5">
+            <div class="card"><span class="ptag">ON-DEMAND</span><h4 data-ko="YouTube" data-en="YouTube" data-ja="YouTube"></h4><ul class="tk"><li data-ko="큐레이션·스핀오프" data-en="Curation · spin-off" data-ja="キュレーション・スピンオフ"></li><li data-ko="오리지널 채널" data-en="Original channels" data-ja="オリジナルch"></li></ul></div>
+            <div class="card"><span class="ptag rt">실시간+VOD</span><h4 data-ko="OTT" data-en="OTT" data-ja="OTT"></h4><ul class="tk"><li data-ko="Wavve (자체)" data-en="Wavve (own)" data-ja="Wavve（自社）"></li><li data-ko="Seezn 등" data-en="Seezn, etc." data-ja="Seezn など"></li></ul></div>
+            <div class="card"><span class="ptag rt">실시간+VOD</span><h4 data-ko="자체 플랫폼" data-en="Own Platforms" data-ja="自社PF"></h4><ul class="tk"><li data-ko="홈페이지" data-en="Homepage" data-ja="ホームページ"></li><li data-ko="myK · Kong" data-en="myK · Kong" data-ja="myK・Kong"></li></ul></div>
+            <div class="card"><span class="ptag rt">실시간</span><h4 data-ko="유료방송" data-en="Pay TV" data-ja="有料放送"></h4><ul class="tk"><li data-ko="IPTV · 케이블(MSO)" data-en="IPTV · Cable (MSO)" data-ja="IPTV・ケーブル(MSO)"></li><li data-ko="위성" data-en="Satellite" data-ja="衛星"></li></ul></div>
+            <div class="card hi"><span class="ptag rt">실시간</span><h4 data-ko="지상파" data-en="Terrestrial" data-ja="地上波"></h4><ul class="tk"><li data-ko="TV · 라디오 · DMB" data-en="TV · Radio · DMB" data-ja="TV・ラジオ・DMB"></li></ul></div>
+          </div>
+          <div class="spectrum"><span class="end" data-ko="◀ 디지털 플랫폼" data-en="◀ Digital" data-ja="◀ デジタルPF"></span><span class="bar"></span><span class="end" data-ko="레거시 미디어 ▶" data-en="Legacy ▶" data-ja="レガシー ▶"></span></div>
+        </div>
+        <div class="note"><div class="nl" data-ko="실시간(스트리밍)부터 온디맨드까지, 모든 플랫폼에 같은 공영 콘텐츠를 안정적으로 공급하는 것이 송출 인프라의 과제입니다." data-en="Supplying the same public-service content reliably across every platform — from real-time streaming to on-demand — is the task of the delivery infrastructure." data-ja="リアルタイム（ストリーミング）からオンデマンドまで、あらゆるPFに同じ公共コンテンツを安定供給することが送出インフラの課題です。"></div></div>
       </div>
     </section>
 
     <!-- ===== 07 TERRESTRIAL + TRANSMISSION + AM ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">07</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">09</div>
           <div class="tb-part"><span class="pp">Part II · Transmission</span><span class="ps" data-ko="지상파 역할·송신 현황" data-en="Terrestrial & Transmission" data-ja="地上波・送信の現状"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">07 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">09 / 13</span></div>
       </div>
       <div class="main">
         <div class="qchip" data-ko="관련 의제 · NHK Q2 (전송로의 과제)" data-en="Related agenda · NHK Q2 (transmission paths)" data-ja="関連議題 · NHK Q2（伝送路の課題）"></div>
@@ -477,15 +548,15 @@
             <div class="card accent"><div class="kk">Public Role</div><h4 data-ko="공영적 기능" data-en="Public Role" data-ja="公共的機能"></h4>
               <ul class="tk"><li data-ko="무료 보편 서비스" data-en="Free universal service" data-ja="無料の普遍的サービス"></li><li data-ko="재난방송" data-en="Emergency broadcasting" data-ja="災害放送"></li><li data-ko="지역·공적 정보" data-en="Regional / public info" data-ja="地域・公的情報"></li></ul></div>
             <div class="card hi"><div class="kk">Transmission</div><h4 data-ko="송신 현황·과제" data-en="Transmission Status" data-ja="送信の現状"></h4>
-              <ul class="tk"><li data-ko="HD/UHD 동시 송출 부담" data-en="HD/UHD dual-delivery load" data-ja="HD/UHD同時送出の負担"></li><li data-ko="지역 송신망 구축" data-en="Regional network build-out" data-ja="地域送信網の構築"></li><li data-ko="주파수 효율화 검토" data-en="Spectrum efficiency review" data-ja="周波数効率化の検討"></li></ul></div>
+              <ul class="tk"><li data-ko="2017 수도권 UHD 본방송·지역 순차 전환" data-en="2017 capital UHD, regional rollout" data-ja="2017首都圏UHD・地域順次転換"></li><li data-ko="HD/UHD 동시 송출 → UHD 전환 검토" data-en="HD/UHD simulcast → UHD transition" data-ja="HD/UHD同時送出→UHD移行検討"></li><li data-ko="주파수 효율화" data-en="Spectrum efficiency" data-ja="周波数効率化"></li></ul></div>
             <div class="card accent"><div class="kk">AM Radio</div><h4 data-ko="AM·라디오 현황" data-en="AM · Radio" data-ja="AM・ラジオの現状"></h4>
-              <ul class="tk"><li data-ko="DMB 종료·AM 효율화 검토" data-en="DMB end & AM efficiency" data-ja="DMB終了・AM効率化の検討"></li><li data-ko="UHD 모바일·FM 등 대체 수신" data-en="UHD-mobile, FM as alternatives" data-ja="UHDモバイル・FM等の代替受信"></li><li data-ko="상세 데이터 보완 예정" data-en="Detailed data to be added" data-ja="詳細データは追って追加"></li></ul></div>
+              <ul class="tk"><li data-ko="전국 중파 송신소 약 20개소" data-en="~20 MW (AM) stations nationwide" data-ja="全国の中波送信所 約20か所"></li><li data-ko="표준AM·2R·장애인·국제방송 송출" data-en="Standard AM · 2R · accessibility · int'l" data-ja="標準AM・2R・障がい者・国際放送"></li><li data-ko="FM 전국망 구축 완료" data-en="Nationwide FM network completed" data-ja="FM全国網の構築完了"></li></ul></div>
           </div>
-          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="KBS는 2017년 6월 수도권 UHD 본방송을 시작해 지역권으로 순차 전환 중이며, HD/UHD 동시 송출에서 UHD 전환 완료·HD 종료를 검토하고 있습니다." data-en="KBS launched capital-area UHD in June 2017 and is converting region by region; from HD/UHD simulcast it is reviewing UHD completion and HD shutdown." data-ja="KBSは2017年6月に首都圏でUHD本放送を開始し地域へ順次転換中で、HD/UHD同時送出からUHDへの完全移行・HD終了を検討している。"></p></div>
+          <div class="pull case"><span class="ct">KBS CASE</span><p data-ko="AM 라디오는 청취율이 약 4%(방통위 2024)로 낮고, 송신기 노후화와 에너지 비용 급증으로, 출력저감 제어 등 효율화와 선택과 집중을 검토하고 있습니다." data-en="AM listening is low (~4%, KCC 2024); with aging transmitters and rising energy costs, KBS is reviewing efficiency measures (e.g., power-reduction control) and a focus-and-select approach." data-ja="AMラジオは聴取率が約4%（放送通信委2024）と低く、送信機の老朽化とエネルギー費の急増を受け、出力低減制御などの効率化と選択・集中を検討しています。"></p></div>
         </div>
         <div class="note">
           <div class="nl" data-ko="기존 인프라는 종료·축소가 아니라 효율화와 선택·집중의 관점에서 검토할 필요가 있다고 보고 있습니다." data-en="We see legacy infrastructure as a matter of efficiency and focus, rather than shutdown or reduction." data-ja="既存インフラは終了・縮小ではなく、効率化と選択・集中の観点で検討する必要があると考えています。"></div>
-          <div class="nl" data-ko="※ <b>보편 서비스</b> = 누구나 무료로 받을 수 있는 기본 방송 서비스 · AM 상세 현황은 별도 데이터로 보완 예정" data-en="※ <b>Universal service</b> = basic broadcasting everyone can receive for free · AM details to be supplemented." data-ja="※ <b>普遍的サービス</b> = 誰もが無料で受けられる基本的な放送 · AMの詳細は別途追加予定。"></div>
+          <div class="nl" data-ko="※ <b>FM 전국망</b>으로 대체 수신 기반 확보 · <b>한민족방송</b>(대외): 당진·김제(중파)·화성(단파)로 연해주·사할린·중국 등 송출" data-en="※ Nationwide <b>FM</b> gives an alternative reception base · <b>Hanminjok</b> (overseas): MW from Dangjin/Gimje, SW from Hwaseong toward Primorye/Sakhalin/China." data-ja="※ <b>FM全国網</b>で代替受信基盤を確保 · <b>ハンミンジョク放送</b>（対外）：タンジン・キムジェ（中波）、ファソン（短波）で沿海州・サハリン・中国等へ送出。"></div>
         </div>
       </div>
     </section>
@@ -493,9 +564,9 @@
     <!-- ===== 08 MULTI-PLATFORM DISTRIBUTION ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">08</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">10</div>
           <div class="tb-part"><span class="pp">Part II · Distribution</span><span class="ps" data-ko="멀티플랫폼 분배" data-en="Multi-Platform Distribution" data-ja="マルチプラットフォーム配信"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">08 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">10 / 13</span></div>
       </div>
       <div class="main">
         <div class="qchip" data-ko="관련 의제 · NHK Q6 (인터넷 배포 설비와 기술 부문 관여)" data-en="Related agenda · NHK Q6 (internet distribution & tech-dept role)" data-ja="関連議題 · NHK Q6（ネット配信設備と技術部門の関与）"></div>
@@ -518,9 +589,9 @@
     <!-- ===== 09 CTV/FAST & CONVERGENCE ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">09</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">11</div>
           <div class="tb-part"><span class="pp">Part II · Distribution</span><span class="ps" data-ko="CTV·FAST · 방송통신 융합" data-en="CTV·FAST & Convergence" data-ja="CTV・FASTと放送通信融合"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">09 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">11 / 13</span></div>
       </div>
       <div class="main">
         <h2 class="ttl" data-ko="송출 인프라의 *데이터화*와 융합" data-en="*Data-driven* delivery & convergence" data-ja="送出インフラの*データ化*と融合"></h2>
@@ -544,27 +615,24 @@
     <!-- ===== 10 FUTURE DIRECTION ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">10</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">12</div>
           <div class="tb-part"><span class="pp">Outlook</span><span class="ps" data-ko="미래 방향" data-en="Future Direction" data-ja="今後の方向性"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">10 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">12 / 13</span></div>
       </div>
       <div class="main">
-        <div class="qchip" data-ko="관련 의제 · NHK Q3 (중장기 미래상) · Q7 (HAPS 등 주목 기술)" data-en="Related agenda · NHK Q3 (mid/long-term) · Q7 (emerging tech)" data-ja="関連議題 · NHK Q3（中長期） · Q7（注目技術）"></div>
+        <div class="qchip" data-ko="관련 의제 · NHK Q3 (중장기 미래상)" data-en="Related agenda · NHK Q3 (mid/long-term)" data-ja="関連議題 · NHK Q3（中長期）"></div>
         <h2 class="ttl" data-ko="중장기적으로 *하이브리드 방향*으로" data-en="A mid/long-term *hybrid direction*" data-ja="中長期的に*ハイブリッドの方向*へ"></h2>
         <p class="lead" data-ko="구체적 시점을 단정하기는 어렵지만, 지상파의 공영적 기능을 유지하며 IP·클라우드·AI를 결합하는 방향으로 점진적으로 나아갈 것으로 보고 있습니다." data-en="Exact timing is hard to fix, but we expect to move gradually toward keeping terrestrial's public role while combining IP, cloud and AI." data-ja="具体的な時期を断定するのは難しいが、地上波の公共的機能を維持しつつIP・クラウド・AIを組み合わせる方向へ段階的に進むと見ている。"></p>
         <div class="content">
-          <div class="g3">
+          <div class="g2">
             <div class="card accent"><div class="kk">Near-term</div><h4 data-ko="정비 단계" data-en="Consolidation" data-ja="整備の段階"></h4>
               <ul class="tk"><li data-ko="RF + IP 운영 안정화" data-en="Stabilize RF + IP" data-ja="RF + IP運用の安定化"></li><li data-ko="통합주조·AI QC 도입" data-en="Integrated MC · AI QC" data-ja="統合主調・AI QCの導入"></li></ul></div>
-            <div class="card accent"><div class="kk">Direction</div><h4 data-ko="하이브리드 정착" data-en="Hybrid Settles" data-ja="ハイブリッドの定着"></h4>
+            <div class="card hi"><div class="kk">Direction</div><h4 data-ko="하이브리드 정착" data-en="Hybrid Settles" data-ja="ハイブリッドの定着"></h4>
               <ul class="tk"><li data-ko="지상파 역할 재정의" data-en="Terrestrial role redefined" data-ja="地上波の役割再定義"></li><li data-ko="IP·클라우드 제작·송출 확대" data-en="Expand IP/cloud ops" data-ja="IP・クラウド運用の拡大"></li></ul></div>
-            <div class="card hi"><div class="kk">Watching</div><h4 data-ko="주목 기술 검토" data-en="Emerging Tech" data-ja="注目技術の検討"></h4>
-              <ul class="tk"><li>HAPS</li><li data-ko="위성 인터넷" data-en="Satellite internet" data-ja="衛星インターネット"></li><li>6G</li></ul></div>
           </div>
         </div>
         <div class="note">
-          <div class="nl" data-ko="위 단계 구분과 기술 항목은 확정 계획이 아니라 검토 방향이며, 규제·시장·기술 성숙도에 따라 조정될 수 있습니다." data-en="These phases and items are a direction under review, not a fixed plan, and may change with regulation, market and maturity." data-ja="上記の段階や項目は確定計画ではなく検討方向であり、規制・市場・成熟度により調整され得ます。"></div>
-          <div class="nl" data-ko="※ <b>HAPS</b> = 성층권에 띄운 무선 중계 플랫폼(High-Altitude Platform Station)으로, 광역 커버리지 보완 기술로 주목받고 있음" data-en="※ <b>HAPS</b> = High-Altitude Platform Station, a stratospheric relay drawing attention as wide-area coverage support." data-ja="※ <b>HAPS</b> = 成層圏の無線中継プラットフォーム。広域カバレッジ補完技術として注目。"></div>
+          <div class="nl" data-ko="위 단계 구분은 확정 계획이 아니라 검토 방향이며, 규제·시장·기술 성숙도에 따라 조정될 수 있습니다." data-en="These phases are a direction under review, not a fixed plan, and may change with regulation, market and maturity." data-ja="上記の段階は確定計画ではなく検討方向であり、規制・市場・成熟度により調整され得ます。"></div>
         </div>
       </div>
     </section>
@@ -572,9 +640,9 @@
     <!-- ===== 11 CONCLUSION ===== -->
     <section class="slide">
       <div class="topbar">
-        <div class="tb-left"><div class="tb-idx" data-go="1">11</div>
+        <div class="tb-left"><div class="tb-idx" data-go="1">13</div>
           <div class="tb-part"><span class="pp">Outlook</span><span class="ps" data-ko="결론" data-en="Conclusion" data-ja="まとめ"></span></div></div>
-        <div class="tb-right"><span class="brand"></span><span class="tb-count">11 / 11</span></div>
+        <div class="tb-right"><span class="brand"></span><span class="tb-count">13 / 13</span></div>
       </div>
       <div class="main">
         <h2 class="ttl" data-ko="KBS의 방향은 *하이브리드 공영 인프라*" data-en="KBS aims for a *hybrid public-service infrastructure*" data-ja="KBSの方向は*ハイブリッド公共インフラ*"></h2>
@@ -608,13 +676,13 @@
           <table class="tbl">
             <thead><tr><th>NHK</th><th data-ko="의제 / Agenda" data-en="Agenda" data-ja="議題"></th><th data-ko="다룬 슬라이드" data-en="Covered in" data-ja="該当スライド"></th></tr></thead>
             <tbody>
-              <tr><td>Q1</td><td data-ko="미디어 환경 변화" data-en="Media environment change" data-ja="メディア環境の変化"></td><td>02 · 03</td></tr>
-              <tr><td>Q2</td><td data-ko="전송로(지상파·위성·인터넷) 과제" data-en="Transmission-path challenges" data-ja="伝送路の課題"></td><td>07 · 08</td></tr>
-              <tr><td>Q3</td><td data-ko="중장기 방송 인프라 미래상" data-en="Mid/long-term infrastructure vision" data-ja="中長期のインフラ未来像"></td><td>10</td></tr>
-              <tr><td>Q4</td><td data-ko="시청 디바이스 변화 대응" data-en="Response to device change" data-ja="視聴デバイスの変化対応"></td><td>03</td></tr>
-              <tr><td>Q5</td><td data-ko="4K/8K 기술 방향" data-en="4K/8K direction" data-ja="4K/8Kの方向性"></td><td>05</td></tr>
-              <tr><td>Q6</td><td data-ko="인터넷 배포 설비와 기술 부문 관여" data-en="Internet distribution & tech-dept role" data-ja="ネット配信設備と技術部門の関与"></td><td>08</td></tr>
-              <tr><td>Q7</td><td data-ko="HAPS 등 주목 기술" data-en="Emerging tech (HAPS, etc.)" data-ja="HAPS等の注目技術"></td><td>10</td></tr>
+              <tr><td>Q1</td><td data-ko="미디어 환경 변화" data-en="Media environment change" data-ja="メディア環境の変化"></td><td>03 · 04</td></tr>
+              <tr><td>Q2</td><td data-ko="전송로(지상파·위성·인터넷) 과제" data-en="Transmission-path challenges" data-ja="伝送路の課題"></td><td>09 · 10</td></tr>
+              <tr><td>Q3</td><td data-ko="중장기 방송 인프라 미래상" data-en="Mid/long-term infrastructure vision" data-ja="中長期のインフラ未来像"></td><td>12</td></tr>
+              <tr><td>Q4</td><td data-ko="시청 디바이스 변화 대응" data-en="Response to device change" data-ja="視聴デバイスの変化対応"></td><td>04</td></tr>
+              <tr><td>Q5</td><td data-ko="4K/8K 기술 방향" data-en="4K/8K direction" data-ja="4K/8Kの方向性"></td><td>06</td></tr>
+              <tr><td>Q6</td><td data-ko="인터넷 배포 설비와 기술 부문 관여" data-en="Internet distribution & tech-dept role" data-ja="ネット配信設備と技術部門の関与"></td><td>10</td></tr>
+              <tr><td>Q7</td><td data-ko="HAPS 등 주목 기술" data-en="Emerging tech (HAPS, etc.)" data-ja="HAPS等の注目技術"></td><td>12</td></tr>
             </tbody>
           </table>
         </div>
